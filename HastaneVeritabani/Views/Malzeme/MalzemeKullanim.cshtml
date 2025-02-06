@@ -1,0 +1,89 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Malzeme_Kullanim>
+@{
+    ViewBag.Title = "MalzemeKullanim";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet malzeme kullanım kaydı bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Malzeme/YeniMalzemeKullanim" class="btn btn-success">Yeni Malzeme Kullanım Kaydı Oluştur</a>
+</div>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Hasta/Doktor/Kayıt No ara" onclick="this.select() " value="@ViewBag.arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Malzeme/MalzemeKullanim" class="btn btn-primary">Sıfırla</a>
+    </form>
+    <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+        <span style="opacity: 0.5;">Departman:</span>
+        <select name="departman_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var departman in ViewBag.departmanListesi as SelectList)
+            {
+                <option value="@departman.Value" @(Request.QueryString["departman_id"] == departman.Value ? "selected" : "")>
+                    @departman.Text
+                </option>
+            }
+        </select>
+        <span style="opacity: 0.5;">Malzeme:</span>
+        <select name="malzeme_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var malzeme in ViewBag.malzemeListesi as SelectList)
+            {
+                <option value="@malzeme.Value" @(Request.QueryString["malzeme_id"] == malzeme.Value ? "selected" : "")>
+                    @malzeme.Text
+                </option>
+            }
+        </select>
+    </form>
+</div>
+<br />
+    <b>Kullanılan Malzeme;</b>
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+        <tr>
+            <th>Acil/Randevu Kayıt No</th>
+            <th>Departman Ad</th>
+            <th>Hasta TC No</th>
+            <th>Doktor TC No</th>
+            <th>Ad</th>
+            <th>Adet</th>
+            <th>İşlem Tarihi</th>
+        </tr>
+        <tbody>
+            @foreach (var malzemeKullanim in Model)
+            {
+                <tr>
+                    @if (malzemeKullanim.acil_id != null)
+                    {
+                        <td>@malzemeKullanim.acil_id</td>
+                        <td>Acil</td>
+                        <td>@malzemeKullanim.Acil_Kayit.Hasta.hasta_tcno</td>
+                        <td>@malzemeKullanim.Acil_Kayit.Personel.personel_tcno</td>
+                    }
+                    @if (malzemeKullanim.randevu_id != null)
+                    {
+                        <td>@malzemeKullanim.randevu_id</td>
+                        <td>@malzemeKullanim.Randevu.Departman.departman_ad</td>
+                        <td>@malzemeKullanim.Randevu.Hasta.hasta_tcno</td>
+                        <td>@malzemeKullanim.Randevu.Personel.personel_tcno</td>
+                    }
+                    <td>@malzemeKullanim.Malzeme_Stok.malzeme_ad</td>
+                    <td>@malzemeKullanim.kullanim_adet</td>
+                    <td>@malzemeKullanim.kullanim_tarihi</td>
+                    <td style="text-align: right;">
+                        <a href="@Url.Action("MalzemeKullanimSil", "Malzeme", new { id = malzemeKullanim.kullanim_id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div style="text-align: center;">
+        @Html.PagedListPager((IPagedList)Model, page => Url.Action("MalzemeKullanim", "Malzeme", new { sayfa = page, arama = ViewBag.arama }))
+    </div>

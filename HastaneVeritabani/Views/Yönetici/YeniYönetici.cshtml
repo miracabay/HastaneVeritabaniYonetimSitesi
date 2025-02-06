@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "YeniYönetici";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Yönetici Ekle</h2>
+        <div class="form-item">
+            <label for="kullanici_adi">Adı</label>
+            <input type="text" class="input-dark-theme" name="kullanici_adi" required placeholder="Yönetici Adı" />
+        </div>
+        <div class="form-item">
+            <label for="kullanici_adi">Şifresi</label>
+            <input type="password" class="input-dark-theme" name="sifre" required placeholder="***********" />
+        </div>
+        <div class="form-item">
+            <label for="kullanici_adi">Şifre Doğrulama</label>
+            <input type="password" class="input-dark-theme" name="sifre_dogrulama" required placeholder="***********" />
+        </div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>

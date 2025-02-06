@@ -1,0 +1,105 @@
+﻿@model List<HastaneVeritabani.Models.Entity.sp_PersonelBilgi_Result>
+
+@{
+    ViewBag.Title = "PersonelBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@foreach (var personelBilgi in Model)
+{
+    <h3>
+        <i>@personelBilgi.PersonelTCNo</i> TC Numaralı <i>@personelBilgi.PersonelAd</i>
+        <i>@personelBilgi.PersonelSoyad</i> isimli personel bilgileri
+    </h3>
+    <h4>Personel Durumu: <i class="@(personelBilgi.PersonelDurum == true ? "text-success" : "text-danger")">@(personelBilgi.PersonelDurum == true ? "Aktif" : "Pasif")</i></h4>
+    <br>
+    <br>
+    <br>
+
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+
+        <tr>
+            <th>Telefon Numarası</th>
+            <td>@personelBilgi.PersonelTelefon</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Cinsiyeti</th>
+            <td>@(personelBilgi.PersonelCinsiyet == true ? "Erkek" : "Kadın")</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Bulunduğu Departman</th>
+            <td>@personelBilgi.PersonelDepartman</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Meslek Bilgisi</th>
+            <td>@personelBilgi.PersonelMeslek</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Maaş Bilgisi</th>
+            <td>@personelBilgi.PersonelMaas ₺</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Yaşı</th>
+            <td>@ViewBag.yas</td>
+
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Doğum Tarihi</th>
+            <td>@String.Format("{0:dd.MM.yyyy}", personelBilgi.PersonelDogumTarihi)</td>
+
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Hastane Giriş Tarihi</th>
+            <td>@String.Format("{0:dd.MM.yyyy}", personelBilgi.PersonelGirisTarihi)</td>
+        </tr>
+        @if (ViewBag.doktorDurum)
+        {
+            <tbody><tr></tr></tbody>
+            <tr>
+                <th>Aktif İlgilendiği Hasta Sayısı</th>
+                <td>@personelBilgi.KayitRandevuHastaAktifToplamSayi</td>
+            </tr>
+            <tbody><tr></tr></tbody>
+            <tr>
+                <th>Toplam İlgilendiği Hasta Sayısı</th>
+                <td>@personelBilgi.KayitRandevuHastaToplamSayi</td>
+            </tr>
+            <tbody><tr></tr></tbody>
+            <tr>
+                <th>İstenen Test Sayısı</th>
+                <td>@personelBilgi.PersonelSonucSayi</td>
+            </tr>
+            <tbody><tr></tr></tbody>
+            <tr>
+                <th>Yazılan Reçete Sayısı</th>
+                <td>@personelBilgi.PersonelReceteSayi</td>
+            </tr>
+            <tbody><tr></tr></tbody>
+            <tr>
+                <th>Malzeme Kullanım Sayısı</th>
+                <td>@personelBilgi.PersonelMalzemeKullanimSayi</td>
+            </tr>
+        }
+
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Adres Bilgisi</th>
+            <td><a href="@Url.Action("AdresBilgi", "Adres", new { id = personelBilgi.PersonelAdresID })" class="btn btn-warning" target="_blank">🗺️</a></td>
+        </tr>
+    </table>
+    <div class="center-form-container">
+        <a href="@Url.Action("Index", "Personel")" class="btn btn-warning"> Geri </a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("Sil", "Personel", new { id = personelBilgi.PersonelID })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("PersonelGetir", "Personel", new { id = personelBilgi.PersonelID })" class="btn btn-primary">Güncelle</a>
+
+    </div>
+}

@@ -1,0 +1,26 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="center-form-container">
+    <form action="/Account/Login" class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Lütfen Giriş Yapın</h2>
+        <div class="form-item">
+            <label>Kullanıcı Adı</label>
+            <input type="text" class="input-dark-theme" name="girilenUsername" placeholder="Kullanıcı Adı" required />
+        </div>
+        <div class="form-item">
+            <label>Şifre</label>
+            <input type="password" class="input-dark-theme" name="girilenPassword" placeholder="***********" required />
+        </div>
+        <br />
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary">Giriş Yap</button>
+        </div>
+    </form>
+</div>

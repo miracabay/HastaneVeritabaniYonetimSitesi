@@ -1,0 +1,57 @@
+﻿@model HastaneVeritabani.Models.Entity.Randevu
+
+@{
+    ViewBag.Title = "RandevuBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3><i>@Model.randevu_id</i> numaralı randevu kaydı bilgileri</h3>
+<h4>
+    Kayıt Durumu: <i class="@(Model.randevu_durum == true ? "text-success" : "text-danger")">@(Model.randevu_durum == true ? "Aktif" : "Geçmiş")</i>
+</h4>
+<br>
+<br>
+<br>
+
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+
+    <tr>
+        <th>Departman Adı</th>
+        <td>@Model.Departman.departman_ad</td>
+    </tr>
+    <tbody><tr></tr></tbody>
+    <tr>
+        <th>Hasta TC No</th>
+        <td>@Model.Hasta.hasta_tcno</td>
+    </tr>
+    <tbody><tr></tr></tbody>
+    <tr>
+        <th>Doktor TC No</th>
+        <td>@Model.Personel.personel_tcno</td>
+    </tr>
+    <tbody><tr></tr></tbody>
+    <tr>
+        <th>Hasta Bilgileri</th>
+        <td>
+            <a href="@Url.Action("HastaBilgi", "Hasta", new { id = Model.hasta_id })" class="btn btn-warning" target="_blank">🔍</a>
+        </td>
+    </tr>
+    <tbody><tr></tr></tbody>
+    <tr>
+        <th>Doktor Bilgileri</th>
+        <td>
+            <a href="@Url.Action("PersonelBilgi", "Personel", new { id = Model.personel_id })" class="btn btn-warning" target="_blank">🔍</a>
+        </td>
+    </tr>
+    <tbody><tr></tr></tbody>
+    <tr>
+        <th>Kayıt Tarihi</th>
+        <td>@Model.randevu_tarih</td>
+    </tr>
+    <tbody><tr></tr></tbody>
+</table>
+<div class="center-form-container">
+    <a href="@Url.Action(Model.randevu_durum ? "AktifRandevular" : "GecmisRandevular", "Randevu")" class="btn btn-warning">Geri</a>
+    <span style="margin-right:5px;"></span>
+    <a href="@Url.Action("Sil", "Randevu", new { id = Model.randevu_id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+</div>

@@ -1,0 +1,54 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Departman>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet departman bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Departman/YeniDepartman" class="btn btn-success">Yeni Departman Ekle</a>
+</div>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+
+        <input type="text" name="arama" class="form-control" placeholder="Departman ara" onclick="this.select() " value="@ViewBag.Arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Departman/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+    <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+        <span style="opacity: 0.5;">Aktiflik:</span>
+        <select name="durum" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            <option value="aktif" @(ViewBag.durum == "aktif" ? "selected" : "")>Aktif</option>
+            <option value="pasif" @(ViewBag.durum == "pasif" ? "selected" : "")>Pasif</option>
+        </select>
+    </form>
+</div>
+<b>Departman;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Ad</th>
+        <th>Durum</th>
+        <th>Bilgi</th>
+    </tr>
+    <tbody>
+        @foreach (var departman in Model)
+        {
+            <tr>
+                <td>@departman.departman_ad</td>
+                <td>@(departman.departman_durum ? "Aktif" : "Pasif")</td>
+                <td><a href="@Url.Action("DepartmanBilgi", "Departman", new { id = departman.departman_id })" class="btn btn-warning">🔍</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>

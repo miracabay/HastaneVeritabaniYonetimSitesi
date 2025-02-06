@@ -1,0 +1,80 @@
+﻿@model List<HastaneVeritabani.Models.Entity.sp_DepartmanBilgi_Result>
+
+@{
+    ViewBag.Title = "DepartmanBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@foreach (var departmanBilgi in Model)
+{
+    <h3><i>@departmanBilgi.DepartmanIsim</i> departman bilgileri</h3>
+    <h4>Departman Durumu: <i class="@(departmanBilgi.DepartmanDurum == true ? "text-success" : "text-danger")">@(departmanBilgi.DepartmanDurum == true ? "Aktif" : "Pasif")</i></h4>
+    <br>
+    <br>
+    <br>
+
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+
+        <tr>
+            <th>İstenen Test Sayısı</th>
+            <td>@departmanBilgi.DepartmanSonucSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Yazılan Reçete Sayısı</th>
+            <td>@departmanBilgi.DepartmanReceteSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Malzeme Kullanım Sayısı</th>
+            <td>@departmanBilgi.DepartmanMalzemeKullanimSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>@(departmanBilgi.DepartmanIsim == "Acil" ? "Aktif Kayıt Sayısı" : "Aktif Randevu Sayısı")</th>
+            <td>@departmanBilgi.KayitRandevuHastaAktifToplamSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>@(departmanBilgi.DepartmanIsim == "Acil" ? "Toplam Kayıt Sayısı" : "Toplam Randevu Sayısı")</th>
+            <td>@departmanBilgi.KayitRandevuHastaToplamSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Aktif Personel Sayısı</th>
+            <td>@departmanBilgi.PersonelAktifToplamSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Toplam Personel Sayısı</th>
+            <td>@departmanBilgi.PersonelToplamSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Aktif Personel Maaşı</th>
+            <td>@departmanBilgi.PersonelAktifToplamMaas ₺</td>
+        <tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Toplam Personel Maaşı</th>
+            <td>@departmanBilgi.PersonelToplamMaas ₺</td>
+        </tr>
+    </table>
+    <div class="center-form-container">
+        <a href="@Url.Action("Index", "Departman")" class="btn btn-warning"> Geri </a>
+        <span style="margin-right:5px;"></span>
+        @if (departmanBilgi.DepartmanID != 1)
+        {
+            <a href="@Url.Action("Sil", "Departman", new { id = departmanBilgi.DepartmanID })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+            <span style="margin-right:5px;"></span>
+            <a href="@Url.Action("DepartmanGetir", "Departman", new { id = departmanBilgi.DepartmanID })" class="btn btn-primary">Güncelle</a>
+        }
+        @if (departmanBilgi.DepartmanID == 1)
+        {
+            <div>
+                <span class="text-danger" style="font-size: 15px">Bu departman değiştirilemez ve silinemez.</span>
+            </div>
+        }
+
+    </div>
+}

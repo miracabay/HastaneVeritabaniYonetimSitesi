@@ -1,0 +1,36 @@
+﻿@model HastaneVeritabani.Models.Entity.Malzeme_Stok
+@{
+    ViewBag.Title = "MalzemeStokGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    @using (Html.BeginForm("MalzemeStokGüncelle", "Malzeme", FormMethod.Post, new { @class = "form-group form-container" }))
+    {
+        <h2 style="text-align: center; margin-bottom: 20px;">Malzeme Güncelle</h2>
+
+        @Html.HiddenFor(m => m.malzeme_id)
+
+        <div class="form-item">
+            <label>Adı</label>
+            <input type="text"
+                   name="malzeme_ad"
+                   class="input-dark-theme"
+                   placeholder="@Model.malzeme_ad" />
+        </div>
+
+        <br />
+        if (ViewBag != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary"
+                    onclick="return confirm('Güncellemek istediğinize emin misiniz?');">
+                Güncelle
+            </button>
+        </div>
+    }
+</div>
+

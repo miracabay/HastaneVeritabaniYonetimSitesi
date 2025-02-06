@@ -1,0 +1,83 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Recete>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet reçete kaydı bulundu.</h3>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Hasta/Doktor/Kayıt No ara" onclick="this.select() " value="@ViewBag.arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Recete/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+    <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+        <span style="opacity: 0.5;">Geçerlilik:</span>
+        <select name="durum" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            <option value="gecerli" @(ViewBag.durum == "gecerli" ? "selected" : "")>Geçerli</option>
+            <option value="gecersiz" @(ViewBag.durum == "gecersiz" ? "selected" : "")>Geçersiz</option>
+        </select>
+        <span style="opacity: 0.5;">Departman:</span>
+        <select name="departman_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var departman in ViewBag.departmanListesi as SelectList)
+            {
+                <option value="@departman.Value" @(Request.QueryString["departman_id"] == departman.Value ? "selected" : "")>
+                    @departman.Text
+                </option>
+            }
+        </select>
+    </form>
+</div>
+<br />
+<b>Reçete;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Acil/Randevu Kayıt No</th>
+        <th>Departman Ad</th>
+        <th>Hasta TC No</th>
+        <th>Doktor TC No</th>
+        <th>Durum</th>
+        <th>Son Geçerlilik Tarihi</th>
+        <th>İlaç Bilgi</th>
+    </tr>
+    <tbody>
+        @foreach (var recete in Model)
+        {
+            <tr>
+                @if (recete.acil_id != null)
+                {
+                    <td>@recete.acil_id</td>
+                    <td>Acil</td>
+                    <td>@recete.Acil_Kayit.Hasta.hasta_tcno</td>
+                    <td>@recete.Acil_Kayit.Personel.personel_tcno</td>
+                }
+                @if (recete.randevu_id != null)
+                {
+                    <td>@recete.randevu_id</td>
+                    <td>@recete.Randevu.Departman.departman_ad</td>
+                    <td>@recete.Randevu.Hasta.hasta_tcno</td>
+                    <td>@recete.Randevu.Personel.personel_tcno</td>
+                }
+                <td>@(recete.recete_durum ? "Geçerli" : "Geçersiz")</td>
+                <td>@String.Format("{0:dd.MM.yyyy}", recete.recete_son_kullanim_tarihi)</td>
+                <td>
+                    <a href="@Url.Action("ReceteBilgi", "Recete", new { id = recete.recete_id })" class="btn btn-warning">🔍</a>
+                </td>
+                <td style="text-align: right;">
+                    <a href="@Url.Action("Sil", "Recete", new { id = recete.recete_id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>

@@ -1,0 +1,32 @@
+﻿@model List<HastaneVeritabani.Models.Entity.sp_AnaSayfa_Result>
+
+@{
+    ViewBag.Title = "Ana Sayfa";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@foreach (var item in Model)
+{
+    <div class="center-form-container">
+        <form class="form-group form-container">
+            <h3 style="text-align: center;">Hoşgeldiniz <i>@ViewBag.yönetici_adi</i></h3>
+            <div style="text-align: center;">
+                <h5 style="text-align: center;">
+                    Hastanemiz <i>@item.YöneticiSayi</i> yönetici,
+                    <i>@item.AktifDepartmanSayi</i> aktif departman,
+                    ve <i>@item.AktifPersonelSayi</i> aktif personel ile hizmet vermektedir.
+                </h5>
+            </div>
+            <div style="text-align: center;">
+                <h5 style="text-align: center;">
+                    Veritabanında
+                    <i>@item.HastaSayi</i> hasta, <i>@item.SonucSayi</i> test sonucu,
+                    <i>@item.AcilRandevuSayi</i> randevu ve acil, <i>@item.IlacReceteSayi</i> reçete ve ilaç,
+                    <i>@item.MalzemeIslemSayi</i> malzeme ve işlemler, <i>@item.ButceMeslekSayi</i>
+                    meslek ve bütçe kaydı bilgisi yer almaktadır.
+                </h5>
+            </div>
+        </form>
+    </div>
+
+}

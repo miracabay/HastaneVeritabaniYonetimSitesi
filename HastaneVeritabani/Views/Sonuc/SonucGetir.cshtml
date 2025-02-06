@@ -1,0 +1,68 @@
+﻿@model HastaneVeritabani.Models.Entity.Sonuc
+@{
+    ViewBag.Title = "Güncelle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    @using (Html.BeginForm("Güncelle", "Sonuc", FormMethod.Post, new { @class = "form-group form-container" }))
+    {
+        <h2 style="text-align: center; margin-bottom: 20px;">Tahlil Sonucu Düzenle</h2>
+        @Html.HiddenFor(s => s.sonuc_id)
+
+        if (ViewBag.DepartmanAdi == "Acil")
+        {
+            <div class="form-item">
+                <label for="kayit_tipi">Kayıt Tipi</label>
+                <input type="text" class="input-dark-theme" name="kayit_tipi" value="Acil Kaydı" disabled />
+            </div>
+
+            <div class="form-item">
+                <label for="acil_id">Acil Kayıt No</label>
+                <input type="text" class="input-dark-theme" name="acil_id" value="@ViewBag.AcilRandevuID" disabled />
+            </div>
+        }
+        else
+        {
+            <div class="form-item">
+                <label for="kayit_tipi">Kayıt Tipi</label>
+                <input type="text" class="input-dark-theme" name="kayit_tipi" value="Randevu Kaydı" disabled />
+            </div>
+
+            <div class="form-item">
+                <label for="randevu_id">Randevu Kayıt No</label>
+                <input type="text" class="input-dark-theme" name="randevu_id" value="@ViewBag.AcilRandevuID" disabled />
+            </div>
+        }
+
+        <div class="form-item">
+            <label for="sonuc_test_tipi">Tahlil Türü</label>
+            <input type="text" class="input-dark-theme" name="sonuc_test_tipi" value="@ViewBag.TahlilTürü" disabled />
+        </div>
+
+        <div class="form-item">
+            <label for="sonuc_aciklama">Test Sonucu</label>
+            <textarea class="textarea-dark-theme"
+                      name="sonuc_aciklama"
+                      required
+                      rows="5"
+                      cols="50">@ViewBag.SonucAciklama</textarea>
+        </div>
+
+
+
+
+
+        <br />
+        <div style="color: deepskyblue; text-align: center;">Departman, hasta ve doktor bilgileri veritabanından otomatik olarak çekilmektedir.</div>
+        if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Düzenlemek istediğinize emin misiniz?');">Düzenle</button>
+        </div>
+    }
+</div>

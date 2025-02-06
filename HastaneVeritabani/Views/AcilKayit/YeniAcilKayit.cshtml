@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "YeniAcilKayit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Acil Kayıt</h2>
+        <div class="form-item">
+            <label for="hasta_tcno">Hasta TC No</label>
+            <input type="text" class="input-dark-theme" name="hasta_tcno" required placeholder="Hasta TC Numarası" />
+        </div>
+        <div class="form-item">
+            <label for="tani">Tanı</label>
+            <input type="text" class="input-dark-theme" name="tani" required placeholder="Yüksek ateş, kanama vb." />
+        </div>
+        <br />
+        <div style="color: deepskyblue; text-align: center;">Doktor ataması sistem tarafından otomatik olarak yapılmaktadır.</div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Acil Kaydı Oluştur</button>
+        </div>
+    </form>
+</div>

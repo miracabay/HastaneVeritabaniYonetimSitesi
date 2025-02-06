@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "YeniBütce";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Bütçe Kaydı</h2>
+        <div class="form-item">
+            <label for="bütce_kategori">Kategori</label>
+            <input type="text" class="input-dark-theme" name="bütce_kategori" required placeholder="SSK Ödemesi, Ek Gider vb." />
+        </div>
+        <div class="form-item">
+            <label for="bütce_tipi">İşlem Tipi</label>
+            <select name="bütce_tipi" class="select-dark-theme" required>
+                <option value="" disabled selected>İşlem Tipi</option>
+                <option value="true">Gelir</option>
+                <option value="false">Gider</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="bütce_tutar">Kategori</label>
+            <input type="number" class="input-dark-theme" name="bütce_tutar" required placeholder="1337" />
+            <span style="margin-left: 5px;">₺</span>
+        </div>
+        <br />
+        <div style="color: deepskyblue; text-align: center;">Malzeme Alım işlemleri için bütçe kayıtları sistem tarafından otomatik olarak oluşturulmaktadır.</div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>

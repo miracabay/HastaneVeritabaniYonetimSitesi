@@ -1,0 +1,52 @@
+﻿@model HastaneVeritabani.Models.Entity.Sonuc
+@{
+    ViewBag.Title = "SonucBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h4>
+    @if (ViewBag.Tip == "Acil")
+    {
+        <i>@Model.Acil_Kayit.Hasta.hasta_tcno</i> @:TC Numaralı
+
+        <i>@Model.Acil_Kayit.Hasta.hasta_ad</i> <i>@Model.Acil_Kayit.Hasta.hasta_soyad</i> @:isimli hastaya ait,
+        <br />
+        <br />
+        <i>@Model.Acil_Kayit.Personel.personel_tcno</i> @:TC Numaralı
+
+        <i>@Model.Acil_Kayit.Personel.personel_ad</i> <i>@Model.Acil_Kayit.Personel.personel_soyad</i> @:isimli doktor tarafından
+    }
+    else if (ViewBag.Tip == "Randevu")
+    {
+        <i>@Model.Randevu.Hasta.hasta_tcno</i> @:TC Numaralı
+
+        <i>@Model.Randevu.Hasta.hasta_ad</i> <i>@Model.Randevu.Hasta.hasta_soyad</i> @:isimli hastaya ait,
+        <br />
+        <br />
+        <i>@Model.Randevu.Personel.personel_tcno</i> @:TC Numaralı
+
+        <i>@Model.Randevu.Personel.personel_ad</i> <i>@Model.Randevu.Personel.personel_soyad</i> @:isimli doktor tarafından
+    }
+    <i>@Model.sonuc_test_tarih</i> tarihinde talep edilen,
+    <br />    <br /><i>@Model.sonuc_test_tipi @Model.sonuc_cikis_tarih</i> tarihinde sonuçlandırılmıştır.
+</h4>
+<br>
+<br>
+<br>
+
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+
+    <tr>
+        <th>Tahlil Sonuçları</th>
+    </tr>
+    <tbody><tr></tr></tbody>
+    <tr>
+        <td>@Model.sonuc_aciklama</td>
+    </tr>
+</table>
+    <div class="center-form-container">
+        <a href="@Url.Action("CikmisSonuclar", "Sonuc")" class="btn btn-warning"> Geri </a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("SonucGetir", "Sonuc", new { id = Model.sonuc_id })" class="btn btn-primary">Düzenle</a>
+
+    </div>

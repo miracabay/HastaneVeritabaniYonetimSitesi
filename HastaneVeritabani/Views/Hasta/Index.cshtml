@@ -1,0 +1,50 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Hasta>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet hasta bulundu.</h3>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+
+        <input type="text" name="arama" class="form-control" placeholder="Hasta ara" onclick="this.select() " value="@ViewBag.Arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Hasta/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+</div>
+<b>Hasta;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>TC No</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Cinsiyet</th>
+        <th>Doğum Tarihi</th>
+        <th>Bilgi</th>
+        <th>Adres</th>
+    </tr>
+    <tbody>
+        @foreach (var hasta in Model)
+        {
+            <tr>
+                <td>@hasta.hasta_tcno</td>
+                <td>@hasta.hasta_ad</td>
+                <td>@hasta.hasta_soyad</td>
+                <td>@(hasta.hasta_cinsiyet ? "Erkek" : "Kadın")</td>
+                <td>@String.Format("{0:dd.MM.yyyy}", hasta.hasta_dogum_tarihi)</td>
+                <td><a href="@Url.Action("HastaBilgi", "Hasta", new { id = hasta.hasta_id })" class="btn btn-warning">🔍</a></td>
+                <td><a href="@Url.Action("AdresBilgi", "Adres", new { id = hasta.adres_id })" class="btn btn-warning" target="_blank">🗺️</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>

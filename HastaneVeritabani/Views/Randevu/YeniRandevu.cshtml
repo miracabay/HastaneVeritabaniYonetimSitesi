@@ -1,0 +1,42 @@
+﻿
+@{
+    ViewBag.Title = "Yeni Randevu";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Randevu Kayıt</h2>
+        <div class="form-item">
+            <label for="hasta_tcno">Hasta TC No</label>
+            <input type="text" class="input-dark-theme" name="hasta_tcno" required placeholder="Hasta TC Numarası" />
+        </div>
+
+        <div class="form-item">
+            <label for="departman_id">Departman Adı</label>
+            <select name="departman_id" class="select-dark-theme" required>
+                <option value="" disabled selected>Departman Adı</option>
+                @foreach (var departman in ViewBag.departmanlar as SelectList)
+                {
+                    <option value="@departman.Value">@departman.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label for="tarih">Randevu Tarihi</label>
+            <input type="date" class="input-dark-theme" name="tarih" required />
+        </div>
+        <br />
+        <div style="color: deepskyblue; text-align: center;">Doktor ve saat ataması sistem tarafından otomatik olarak yapılmaktadır.
+        <br />
+                                                             (Hafta İçi / 08.00 - 17.00)</div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Randevu Kaydı Oluştur</button>
+        </div>
+    </form>
+</div>

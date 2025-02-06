@@ -1,0 +1,167 @@
+﻿/* Form düzenlemeleri */
+.form-group {
+    display: flex;
+    flex-direction: column; /* Elemanları alt alta diz */
+    gap: 8px; /* Aralarına boşluk koy */
+}
+
+/* Her bir satır için */
+.form-item {
+    display: flex;
+    align-items: center; /* Ortada hizala */
+}
+
+    /* Label sola dayalı olacak */
+    .form-item label {
+        width: 120px; /* Sabit genişlik */
+        text-align: left; /* Sola hizala */
+    }
+
+/* Input alanları */
+.input-dark-theme {
+    background-color: #1e1e1e; /* Arka plan rengini koyu yap */
+    color: #ffffff; /* Yazı rengini beyaz yap */
+    border: 1px solid #555555;
+    padding: 3px 8px;
+    font-size: 14px;
+    border-radius: 4px;
+    height: 30px;
+    width: 200px;
+    box-sizing: border-box;
+}
+
+.center-text {
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.center-form-container {
+    display: flex;
+    justify-content: center; /* Yatayda ortalama */
+    align-items: center; /* Dikeyde ortalama */
+    height: 50vh; /* Sayfanın tam yüksekliği kadar */
+}
+
+.form-container {
+    text-align: left; /* Form içeriğini sola hizala */
+    width: 100%;
+    max-width: 400px; /* Form genişliğini sınırla */
+}
+
+select.dark-theme-dropdown {
+    background-color: #1e1e1e; /* Arka plan rengini koyu yap */
+    color: #ffffff; /* Yazı rengini beyaz yap */
+    border: 1px solid #555555; /* Kenarlık ekle */
+    border-radius: 4px; /* Köşeleri yuvarlat */
+    padding: 3px 8px; /* İç boşluk */
+    font-size: 14px; /* Yazı boyutu */
+    width: 200px; /* Tam genişlik */
+    height: 30px;
+    appearance: none; /* Varsayılan ok stilini kaldır */
+}
+
+/* Temel ayarlar */
+/* Temel Navbar Düzeni */
+/* Temel Navbar Düzeni */
+.navbar-nav {
+    list-style: none;
+    padding: 10px;
+    margin: 0;
+    display: flex;
+}
+
+    /* Menü Üst Düzeni */
+    .navbar-nav > li {
+        position: relative;
+        margin: 0 0; /* Yanlarda biraz boşluk */
+    }
+
+        .navbar-nav > li > a {
+            text-decoration: none;
+            color: #ffffff;
+            padding: 10px 15px;
+            background-color: #1e1e1e;
+            transition: all 0.2s ease;
+            line-height: 1.5; /* Menü metinlerinin aynı hizada olması */
+        }
+
+            .navbar-nav > li > a:hover {
+                background-color: #333333;
+                color: #00d1ff;
+            }
+
+/* Alt Menü (Dropdown) */
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%; /* Ana menü altına yerleştir */
+    left: 0;
+    background-color: #1e1e1e;
+    border: 1px solid #555555;
+    list-style: none;
+    padding: 0;
+    min-width: 180px;
+    z-index: 10;
+    border-radius: 4px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+    .dropdown-menu li a {
+        text-decoration: none;
+        color: #ffffff;
+        padding: 10px 15px;
+        display: block;
+        line-height: 1.5;
+    }
+
+        .dropdown-menu li a:hover {
+            background-color: #333333;
+            color: #00d1ff;
+        }
+
+/* Menü Hover */
+.dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+/* Navbar Yüksekliği */
+.navbar {
+    line-height: 1.8; /* Genel menü hizalamasını buradan da kontrol ediyoruz */
+    padding: 0 0;
+}
+.select-dark-theme {
+    background-color: #1e1e1e; /* Arka plan rengini koyu yap */
+    color: #ffffff; /* Yazı rengini beyaz yap */
+    border: 1px solid #555555; /* Aynı kenarlık gibi görün */
+    padding: 3px 8px; /* Aynı boşluk gibi */
+    font-size: 14px; /* Input ile aynı yazı boyutu */
+    border-radius: 4px; /* Input ile aynı yuvarlak köşe */
+    appearance: none; /* Tarayıcı varsayılan ok stilini kaldır */
+    width: 200px; /* Input genişliği ile aynı */
+    height: 30px; /* Input alanının yüksekliğiyle aynı */
+}
+
+    .select-dark-theme:focus {
+        border-color: #00d1ff; /* Input gibi aktif odaklanma durumunda kenar rengi */
+        outline: none; /* Odaklanırken dış kenar çizgisi olmamalı */
+    }
+/* Dark Theme için sadece renk değişiklikleri */
+.select-dark-theme,
+.form-control {
+    background-color: #2b2b2b; /* Koyu arka plan */
+    color: #ffffff; /* Yazı beyaz */
+    border: 1px solid #555555; /* Kenarlık */
+    border-radius: 4px; /* Köşeler yuvarlat */
+    padding: 5px 8px;
+    font-size: 14px;
+    height: auto; /* Orijinal boyut düzenini bozmamak için */
+}
+.textarea-dark-theme {
+    background-color: #1e1e1e; /* Arka plan koyu */
+    color: #ffffff; /* Yazı rengi beyaz */
+    border: 1px solid #555555; /* Kenarlık */
+    padding: 8px; /* İç boşluk */
+    font-size: 14px; /* Yazı boyutu */
+    border-radius: 4px;

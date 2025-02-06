@@ -1,0 +1,84 @@
+﻿@model HastaneVeritabani.Models.Entity.Hasta
+@{
+    ViewBag.Title = "HastaGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    @using (Html.BeginForm("Güncelle", "Hasta", FormMethod.Post, new { @class = "form-group form-container" }))
+    {
+        <h2 style="text-align: center; margin-bottom: 20px;">Hasta Güncelle</h2>
+
+        @Html.HiddenFor(h => h.hasta_id)
+
+        <div class="form-item">
+            <label>TC No</label>
+            <input type="text"
+                   name="hasta_tcno"
+                   class="input-dark-theme"
+                   placeholder="@Model.hasta_tcno" />
+        </div>
+
+        <div class="form-item">
+            <label>Adı</label>
+            <input type="text"
+                   name="hasta_ad"
+                   class="input-dark-theme"
+                   placeholder="@Model.hasta_ad" />
+        </div>
+
+        <div class="form-item">
+            <label>Soyadı</label>
+            <input type="text"
+                   name="hasta_soyad"
+                   class="input-dark-theme"
+                   placeholder="@Model.hasta_soyad" />
+        </div>
+
+        <div class="form-item">
+            <label>Telefon Numarası</label>
+            <input type="text"
+                   name="hasta_telefon"
+                   class="input-dark-theme"
+                   placeholder="@Model.hasta_telefon" />
+        </div>
+
+        <div class="form-item">
+            <label>Cinsiyeti</label>
+            <select name="hasta_cinsiyet" class="select-dark-theme">
+                <option value="true" @(Model.hasta_cinsiyet == true ? "selected" : "")>Erkek</option>
+                <option value="false" @(Model.hasta_cinsiyet == false ? "selected" : "")>Kadın</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label>Doğum Tarihi</label>
+            <input type="date"
+                   name="hasta_dogum_tarihi"
+                   class="input-dark-theme"
+                   placeholder="@Model.hasta_dogum_tarihi" />
+        </div>
+
+        <div class="form-item">
+            <label>Adresi</label>
+            <button type="button" class="btn btn-info"
+                    onclick="window.open('/Adres/AdresGetir/@Model.adres_id');">
+                Adres Kaydını Güncelle
+            </button>
+        </div>
+
+
+        <br />
+        if (ViewBag != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary"
+                    onclick="return confirm('Güncellemek istediğinize emin misiniz?');">
+                Güncelle
+            </button>
+        </div>
+    }
+</div>

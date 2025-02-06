@@ -1,0 +1,100 @@
+﻿
+@{
+    ViewBag.Title = "YeniPersonel";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Personel Ekle</h2>
+        <div class="form-item">
+            <label for="personel_tcno">TC No</label>
+            <input type="text" class="input-dark-theme" name="personel_tcno" required placeholder="Personel TC No" />
+        </div>
+        <div class="form-item">
+            <label for="personel_ad">Adı</label>
+            <input type="text" class="input-dark-theme" name="personel_ad" required placeholder="Personel Adı" />
+        </div>
+        <div class="form-item">
+            <label for="personel_soyad">Soyadı</label>
+            <input type="text" class="input-dark-theme" name="personel_soyad" required placeholder="Personel Soyadı" />
+        </div>
+        <div class="form-item">
+            <label for="personel_telefon">Telefon No</label>
+            <input type="text" class="input-dark-theme" name="personel_telefon" required placeholder="Personel Telefon No" />
+        </div>
+        <div class="form-item">
+            <label for="personel_dogum_tarihi">Doğum Tarihi</label>
+            <input type="date" class="input-dark-theme" name="personel_dogum_tarihi" required />
+        </div>
+        <div class="form-item">
+            <label for="personel_cinsiyet">Cinsiyeti</label>
+            <select name="personel_cinsiyet" class="select-dark-theme" required>
+                <option value="" disabled selected>Personel Cinsiyeti</option>
+                <option value="true">Erkek</option>
+                <option value="false">Kadın</option>
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="departman_id">Departmanı</label>
+            <select name="departman_id" class="select-dark-theme" required>
+                <option value="" disabled selected>Personel Departmanı</option>
+                @foreach (var departman in ViewBag.departmanlar as SelectList)
+                {
+                    <option value="@departman.Value">@departman.Text</option>
+                }
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="meslek_id">Mesleği</label>
+            <select name="meslek_id" class="select-dark-theme" required>
+                <option value="" disabled selected>Personel Mesleği</option>
+                @foreach (var meslek in ViewBag.meslekler as SelectList)
+                {
+                    <option value="@meslek.Value">@meslek.Text</option>
+                }
+            </select>
+        </div>
+        <div class="form-item">
+            <label for="personel_adres">Adres Bilgileri</label>
+        </div>
+        <div class="form-item">
+            <label for="sehir">Şehir</label>
+            <input type="text" class="input-dark-theme" name="sehir" required placeholder="Şehir Bilgisi" />
+        </div>
+
+        <div class="form-item">
+            <label for="ilce">İlçe</label>
+            <input type="text" class="input-dark-theme" name="ilce" required placeholder="İlçe Bilgisi" />
+        </div>
+
+        <div class="form-item">
+            <label for="mahalle">Mahalle</label>
+            <input type="text" class="input-dark-theme" name="mahalle" required placeholder="Mahalle Bilgisi" />
+        </div>
+
+        <div class="form-item">
+            <label for="sokak">Sokak</label>
+            <input type="text" class="input-dark-theme" name="sokak" required placeholder="Sokak Bilgisi" />
+        </div>
+
+        <div class="form-item">
+            <label for="bina">Bina</label>
+            <input type="text" class="input-dark-theme" name="bina" required placeholder="Bina No" />
+        </div>
+
+        <div class="form-item">
+            <label for="daire">Daire</label>
+            <input type="text" class="input-dark-theme" name="daire" required placeholder="Daire No" />
+        </div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>
+
+

@@ -1,0 +1,58 @@
+﻿@model HastaneVeritabani.Models.Entity.Adres
+@{
+    ViewBag.Title = "AdresBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>
+    @if (ViewBag.Tip == "Hasta")
+    {
+        <i>@ViewBag.hasta.hasta_tcno</i> @:TC Numaralı
+        <br />
+        <i>@ViewBag.hasta.hasta_ad</i> <i>@ViewBag.hasta.hasta_soyad</i> @:isimli hasta adres bilgileri
+    }
+    else if (ViewBag.Tip == "Personel")
+    {
+        <i>@ViewBag.personel.personel_tcno</i> @:TC Numaralı
+        <br />
+        <i>@ViewBag.personel.personel_ad</i> <i>@ViewBag.personel.personel_soyad</i> @:isimli personel adres bilgileri
+    }
+</h3>
+    <br>
+    <br>
+    <br>
+
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+
+        <tr>
+            <th>Şehir</th>
+            <td>@Model.sehir</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>İlçe</th>
+            <td>@Model.ilce</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Mahalle</th>
+            <td>@Model.mahalle</td>
+
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Sokak</th>
+            <td>@Model.sokak</td>
+
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Bina</th>
+            <td>@Model.bina</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Daire</th>
+            <td>@Model.daire</td>
+        </tr>
+    </table>

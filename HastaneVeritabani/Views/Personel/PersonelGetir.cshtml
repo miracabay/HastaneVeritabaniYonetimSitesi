@@ -1,0 +1,124 @@
+﻿@model HastaneVeritabani.Models.Entity.Personel
+@{
+    ViewBag.Title = "PersonelGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    @using (Html.BeginForm("Güncelle", "Personel", FormMethod.Post, new { @class = "form-group form-container" }))
+    {
+        <h2 style="text-align: center; margin-bottom: 20px;">Personel Güncelle</h2>
+
+        @Html.HiddenFor(p => p.personel_id)
+
+        <div class="form-item">
+            <label>Durumu</label>
+            <select name="personel_durum" class="select-dark-theme">
+                <option value="true" @(Model.personel_durum == true ? "selected" : "")>Aktif</option>
+                <option value="false" @(Model.personel_durum == false ? "selected" : "")>Pasif</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label>TC No</label>
+            <input type="text"
+                   name="personel_tcno"
+                   class="input-dark-theme"
+                   placeholder="@Model.personel_tcno" />
+        </div>
+
+        <div class="form-item">
+            <label>Adı</label>
+            <input type="text"
+                   name="personel_ad"
+                   class="input-dark-theme"
+                   placeholder="@Model.personel_ad" />
+        </div>
+
+        <div class="form-item">
+            <label>Soyadı</label>
+            <input type="text"
+                   name="personel_soyad"
+                   class="input-dark-theme"
+                   placeholder="@Model.personel_soyad" />
+        </div>
+
+        <div class="form-item">
+            <label>Telefon Numarası</label>
+            <input type="text"
+                   name="personel_telefon"
+                   class="input-dark-theme"
+                   placeholder="@Model.personel_telefon" />
+        </div>
+
+        <div class="form-item">
+            <label>Cinsiyeti</label>
+            <select name="personel_cinsiyet" class="select-dark-theme">
+                <option value="true" @(Model.personel_cinsiyet == true ? "selected" : "")>Erkek</option>
+                <option value="false" @(Model.personel_cinsiyet == false ? "selected" : "")>Kadın</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label>Departmanı</label>
+            <select name="departman_id" class="select-dark-theme">
+                @foreach (var departman in ViewBag.departmanlar as SelectList)
+                {
+                    <option value="@departman.Value" @(Model.departman_id == Convert.ToInt32(departman.Value) ? "selected" : "")>
+                        @departman.Text
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label>Mesleği</label>
+            <select name="meslek_id" class="select-dark-theme">
+                @foreach (var meslek in ViewBag.meslekler as SelectList)
+                {
+                    <option value="@meslek.Value" @(Model.meslek_id == Convert.ToInt32(meslek.Value) ? "selected" : "")>
+                        @meslek.Text
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label>Doğum Tarihi</label>
+            <input type="date"
+                   name="personel_dogum_tarihi"
+                   class="input-dark-theme"
+                   placeholder="@Model.personel_dogum_tarihi" />
+        </div>
+
+        <div class="form-item">
+            <label>Hastane Giriş Tarihi</label>
+            <input type="datetime"
+                   name="personel_giris_tarihi"
+                   class="input-dark-theme"
+                   placeholder="@Model.personel_giris_tarihi" />
+        </div>
+
+        <div class="form-item">
+            <label>Adresi</label>
+            <button type="button" class="btn btn-info"
+                    onclick="window.open('/Adres/AdresGetir/@Model.adres_id');">
+                Adres Kaydını Güncelle
+            </button>
+        </div>
+
+
+        <br />
+        if (ViewBag != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary"
+                    onclick="return confirm('Güncellemek istediğinize emin misiniz?');">
+                Güncelle
+            </button>
+        </div>
+    }
+</div>

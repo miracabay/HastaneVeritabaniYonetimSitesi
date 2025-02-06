@@ -1,0 +1,91 @@
+﻿@model List<HastaneVeritabani.Models.Entity.sp_HastaBilgi_Result>
+
+@{
+    ViewBag.Title = "HastaBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@foreach (var hastaBilgi in Model)
+{
+    <h3>
+        <i>@hastaBilgi.HastaTCNo</i> TC Numaralı
+        <br />
+        <i>@hastaBilgi.HastaAd</i> <i>@hastaBilgi.HastaSoyad</i> isimli hasta bilgileri
+    </h3>
+    <br>
+    <br>
+    <br>
+
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+
+        <tr>
+            <th>Telefon Numarası</th>
+            <td>@hastaBilgi.HastaTelefon</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Cinsiyeti</th>
+            <td>@(hastaBilgi.HastaCinsiyet == true ? "Erkek" : "Kadın")</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Yaşı</th>
+            <td>@ViewBag.yas</td>
+
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Doğum Tarihi</th>
+            <td>@String.Format("{0:dd.MM.yyyy}", hastaBilgi.HastaDogumTarihi)</td>
+
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Aktif Acil Kaydı</th>
+            <td>@(hastaBilgi.HastaAktifKayitSayi == 0 ? "Bulunmuyor" : "Mevcut")</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Toplam Acil Kayıt Sayısı</th>
+            <td>@hastaBilgi.HastaToplamKayitSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Aktif Randevu Kayıt Sayısı</th>
+            <td>@hastaBilgi.HastaAktifRandevuSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Toplam Randevu Kayıt Sayısı</th>
+            <td>@hastaBilgi.HastaToplamRandevuSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>İstenen Test Sayısı</th>
+            <td>@hastaBilgi.HastaSonucSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Yazılan Reçete Sayısı</th>
+            <td>@hastaBilgi.HastaReceteSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Malzeme Kullanım Sayısı</th>
+            <td>@hastaBilgi.HastaMalzemeKullanimSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Adres Bilgisi</th>
+            <td><a href="@Url.Action("AdresBilgi", "Adres", new { id = hastaBilgi.HastaAdresID })" class="btn btn-warning" target="_blank">🗺️</a></td>
+        </tr>
+    </table>
+    <div class="center-form-container">
+        <a href="@Url.Action("Index", "Hasta")" class="btn btn-warning"> Geri </a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("Sil", "Hasta", new { id = hastaBilgi.HastaID })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("HastaGetir", "Hasta", new { id = hastaBilgi.HastaID })" class="btn btn-primary">Güncelle</a>
+
+    </div>
+}

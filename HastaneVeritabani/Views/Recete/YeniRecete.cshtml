@@ -1,0 +1,39 @@
+﻿@{
+    ViewBag.Title = "YeniRecete";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Reçete Girişi</h2>
+        <div class="form-item">
+            <label for="kayit_tipi">Kayıt Tipi</label>
+            <select name="kayit_tipi" class="select-dark-theme" required>
+                <option value="" disabled @(ViewBag.KayitTipi == null ? "selected" : "")>Kayıt Tipi</option>
+                <option value="acil" @(ViewBag.KayitTipi == "acil" ? "selected" : "")>Acil Kaydı</option>
+                <option value="randevu" @(ViewBag.KayitTipi == "randevu" ? "selected" : "")>Randevu Kaydı</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label for="acil_randevuID">Acil/Randevu Kayıt No</label>
+            <input type="number" class="input-dark-theme" name="acil_randevuID" required placeholder="Acil/Randevu Kayıt No" />
+        </div>
+
+        <div class="form-item">
+            <label for="recete_son_kullanim_tarihi">Son Geçerlilik Tarihi</label>
+            <input type="date" class="input-dark-theme" name="recete_son_kullanim_tarihi" required />
+        </div>
+        <br />
+        <div style="color: deepskyblue; text-align: center;">Departman, hasta ve doktor bilgileri veritabanından otomatik olarak çekilmektedir.</div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Oluşturmak istediğinize emin misiniz?');">Oluştur</button>
+        </div>
+    </form>
+</div>

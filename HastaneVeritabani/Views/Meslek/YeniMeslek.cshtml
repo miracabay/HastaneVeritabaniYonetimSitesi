@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "YeniMeslek";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Meslek Ekle</h2>
+        <div class="form-item">
+            <label for="meslek_ad">Adı</label>
+            <input type="text" class="input-dark-theme" name="meslek_ad" required placeholder="Meslek Adı" />
+        </div>
+
+        <div class="form-item">
+            <label for="meslek_maas">Maaşı</label>
+            <div style="display: flex; align-items: center;">
+                <input type="number" class="input-dark-theme" name="meslek_maas" required placeholder="1337" />
+            </div>
+            <span style="margin-left: 5px;">₺</span>
+        </div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>
+

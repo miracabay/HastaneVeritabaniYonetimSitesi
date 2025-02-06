@@ -1,0 +1,50 @@
+﻿@{
+    ViewBag.Title = "YeniMalzemeKullanim";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Malzeme Kullanım Kaydı</h2>
+        <div class="form-item">
+            <label for="kayit_tipi">Kayıt Tipi</label>
+            <select name="kayit_tipi" class="select-dark-theme" required>
+                <option value="" disabled @(ViewBag.KayitTipi == null ? "selected" : "")>Kayıt Tipi</option>
+                <option value="acil" @(ViewBag.KayitTipi == "acil" ? "selected" : "")>Acil Kaydı</option>
+                <option value="randevu" @(ViewBag.KayitTipi == "randevu" ? "selected" : "")>Randevu Kaydı</option>
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label for="acil_randevuID">Acil/Randevu Kayıt No</label>
+            <input type="number" class="input-dark-theme" name="acil_randevuID" required placeholder="Acil/Randevu Kayıt No" />
+        </div>
+
+        <div class="form-item">
+            <label for="malzeme_id">Malzeme Adı</label>
+            <select name="malzeme_id" class="select-dark-theme" required>
+                <option value="" disabled selected>Malzeme Adı</option>
+                @foreach (var malzeme in ViewBag.malzemeler as SelectList)
+                {
+                    <option value="@malzeme.Value">@malzeme.Text</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-item">
+            <label for="kullanim_adet">Adet</label>
+            <input type="number" class="input-dark-theme" name="kullanim_adet" required placeholder="1337" />
+        </div>
+        <br />
+        <div style="color: deepskyblue; text-align: center;">Departman, hasta ve doktor bilgileri veritabanından otomatik olarak çekilmektedir.</div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+
+            <button type="submit" class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>

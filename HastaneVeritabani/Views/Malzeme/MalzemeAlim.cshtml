@@ -1,0 +1,65 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Malzeme_Alim>
+@{
+    ViewBag.Title = "MalzemeAlim";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet malzeme kullanım kaydı bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Malzeme/YeniMalzemeAlim" class="btn btn-success">Yeni Malzeme Alım Kaydı Oluştur</a>
+</div>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Firma adı ara" onclick="this.select() " value="@ViewBag.arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Malzeme/MalzemeAlim" class="btn btn-primary">Sıfırla</a>
+    </form>
+    <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+        <span style="opacity: 0.5;">Malzeme:</span>
+        <select name="malzeme_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var malzeme in ViewBag.malzemeListesi as SelectList)
+            {
+                <option value="@malzeme.Value" @(Request.QueryString["malzeme_id"] == malzeme.Value ? "selected" : "")>
+                    @malzeme.Text
+                </option>
+            }
+        </select>
+    </form>
+</div>
+<br />
+<b>Alınan Malzeme;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Firma Ad</th>
+        <th>Malzeme Ad</th>
+        <th>Adet</th>
+        <th>Toplam Fiyat</th>
+        <th>İşlem Tarih</th>
+    </tr>
+    <tbody>
+        @foreach (var malzemeAlim in Model)
+        {
+            <tr>
+                <td>@malzemeAlim.alim_firma</td>
+                <td>@malzemeAlim.Malzeme_Stok.malzeme_ad</td>
+                <td>@malzemeAlim.alim_adet</td>
+                <td>@malzemeAlim.alim_fiyat ₺</td>
+                <td>@malzemeAlim.alim_tarihi</td>
+                <td style="text-align: right;">
+                    <a href="@Url.Action("MalzemeAlimSil", "Malzeme", new { id = malzemeAlim.alim_id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("MalzemeAlim", "Malzeme", new { sayfa = page, arama = ViewBag.arama }))
+</div>

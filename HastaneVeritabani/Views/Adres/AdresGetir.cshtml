@@ -1,0 +1,72 @@
+﻿@model HastaneVeritabani.Models.Entity.Adres
+@{
+    ViewBag.Title = "AdresGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    @using (Html.BeginForm("Güncelle", "Adres", FormMethod.Post, new { @class = "form-group form-container" }))
+    {
+        <h2 style="text-align: center; margin-bottom: 20px;">Adres Güncelle</h2>
+
+        @Html.HiddenFor(a => a.adres_id)
+
+        <div class="form-item">
+            <label>Şehir</label>
+            <input type="text"
+                   name="sehir"
+                   class="input-dark-theme"
+                   placeholder="@Model.sehir" />
+        </div>
+
+        <div class="form-item">
+            <label>İlçe</label>
+            <input type="text"
+                   name="ilce"
+                   class="input-dark-theme"
+                   placeholder="@Model.ilce" />
+        </div>
+
+        <div class="form-item">
+            <label>Mahalle</label>
+            <input type="text"
+                   name="mahalle"
+                   class="input-dark-theme"
+                   placeholder="@Model.mahalle" />
+        </div>
+
+        <div class="form-item">
+            <label>Sokak</label>
+            <input type="text"
+                   name="sokak"
+                   class="input-dark-theme"
+                   placeholder="@Model.sokak" />
+        </div>
+
+        <div class="form-item">
+            <label>Bina</label>
+            <input type="text"
+                   name="bina"
+                   class="input-dark-theme"
+                   placeholder="@Model.bina" />
+        </div>
+
+        <div class="form-item">
+            <label>Daire</label>
+            <input type="text"
+                   name="daire"
+                   class="input-dark-theme"
+                   placeholder="@Model.daire" />
+        </div>
+
+        <br />
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary"
+                    onclick="return confirm('Güncellemek istediğinize emin misiniz?');">
+                Güncelle
+            </button>
+        </div>
+    }
+</div>
+

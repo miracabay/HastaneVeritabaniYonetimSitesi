@@ -1,0 +1,47 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Randevu>
+@{
+    ViewBag.Title = "GecmisRandevular";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet geçmiş randevu kaydı bulundu.</h3>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Hasta/Doktor ara" onclick="this.select() " value="@ViewBag.arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Randevu/GecmisRandevular" class="btn btn-primary">Sıfırla</a>
+    </form>
+</div>
+<b>Geçmiş Randevu;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Randevu Kayıt No</th>
+        <th>Departman Ad</th>
+        <th>Hasta TC No</th>
+        <th>Doktor TC No</th>
+        <th>Randevu Tarihi</th>
+        <th>Bilgi</th>
+    </tr>
+    <tbody>
+        @foreach (var randevu in Model)
+        {
+            <tr>
+                <td>@randevu.randevu_id</td>
+                <td>@randevu.Departman.departman_ad</td>
+                <td>@randevu.Hasta.hasta_tcno</td>
+                <td>@randevu.Personel.personel_tcno</td>
+                <td>@randevu.randevu_tarih.ToString("yyyy-MM-dd HH:mm")</td>
+                <td><a href="@Url.Action("RandevuBilgi", "Randevu", new { id = randevu.randevu_id })" class="btn btn-warning">🔍</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("GecmisRandevular", "Randevu", new { sayfa = page, arama = ViewBag.arama }))
+</div>

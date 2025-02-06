@@ -1,0 +1,49 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Acil_Kayit>
+@{
+    ViewBag.Title = "AktifAcilKayitlar";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet aktif acil kaydı bulundu.</h3>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Hasta/Doktor ara" onclick="this.select() " value="@ViewBag.arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/AcilKayit/AktifAcilKayitlar" class="btn btn-primary">Sıfırla</a>
+    </form>
+</div>
+<b>Aktif Acil Kayıt;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Acil Kayıt No</th>
+        <th>Hasta TC No</th>
+        <th>Doktor TC No</th>
+        <th>Tanı</th>
+        <th>Acil Giriş Tarihi</th>
+        <th>Bilgi</th>
+        <th>Taburcu İşlemleri</th>
+    </tr>
+    <tbody>
+        @foreach (var acil_kayit in Model)
+        {
+            <tr>
+                <td>@acil_kayit.acil_id</td>
+                <td>@acil_kayit.Hasta.hasta_tcno</td>
+                <td>@acil_kayit.Personel.personel_tcno</td>
+                <td>@acil_kayit.acil_tani</td>
+                <td>@acil_kayit.acil_giris_tarihi</td>
+                <td><a href="@Url.Action("AcilKayitBilgi", "AcilKayit", new { id = acil_kayit.acil_id })" class="btn btn-warning">🔍</a></td>
+                <td><a href="@Url.Action("AcilKayitTaburcu", "AcilKayit", new { id = acil_kayit.acil_id })" class="btn btn-danger" onclick="return confirm('Hastanın acil işlemlerini sonlandırmak istediğinize emin misiniz?');">Taburcu</a>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("AktifAcilKayitlar", "AcilKayit", new { sayfa = page, arama = ViewBag.arama }))
+</div>

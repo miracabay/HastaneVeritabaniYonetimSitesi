@@ -1,0 +1,43 @@
+﻿@model HastaneVeritabani.Models.Entity.Departman
+@{
+    ViewBag.Title = "DepartmanGetir";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    @using (Html.BeginForm("Güncelle", "Departman", FormMethod.Post, new { @class = "form-group form-container" }))
+    {
+        <h2 style="text-align: center; margin-bottom: 20px;">Departman Güncelle</h2>
+
+        @Html.HiddenFor(d => d.departman_id)
+
+        <div class="form-item">
+            <label>Adı</label>
+            <input type="text"
+                   name="departman_ad"
+                   class="input-dark-theme"
+                   placeholder="@Model.departman_ad" />
+        </div>
+
+        <div class="form-item">
+            <label>Durumu</label>
+            <select name="departman_durum" class="select-dark-theme">
+                <option value="true" @(Model.departman_durum == true ? "selected" : "")>Aktif</option>
+                <option value="false" @(Model.departman_durum == false ? "selected" : "")>Pasif</option>
+            </select>
+        </div>
+        <br />
+        if (ViewBag != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+
+        <div style="text-align: center; margin-top: 20px;">
+            <button type="submit" class="btn btn-primary"
+                    onclick="return confirm('Güncellemek istediğinize emin misiniz?');">
+                Güncelle
+            </button>
+        </div>
+    }
+</div>
+

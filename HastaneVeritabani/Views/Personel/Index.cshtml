@@ -1,0 +1,85 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Personel>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet personel bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Personel/YeniPersonel" class="btn btn-success">Yeni Personel Ekle</a>
+</div>
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+
+        <input type="text" name="arama" class="form-control" placeholder="Personel ara" onclick="this.select() " value="@ViewBag.Arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Personel/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+    <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+        <span style="opacity: 0.5;">Aktiflik:</span>
+        <select name="durum" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            <option value="aktif" @(ViewBag.durum == "aktif" ? "selected" : "")>Aktif</option>
+            <option value="pasif" @(ViewBag.durum == "pasif" ? "selected" : "")>Pasif</option>
+        </select>
+        <span style="opacity: 0.5;">Departman:</span>
+        <select name="departman_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var departman in ViewBag.departmanlar as SelectList)
+            {
+                <option value="@departman.Value" @(Request.QueryString["departman_id"] == departman.Value ? "selected" : "")>
+                    @departman.Text
+                </option>
+            }
+        </select>
+        <span style="opacity: 0.5;">Meslek:</span>
+        <select name="meslek_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var meslek in ViewBag.meslekler as SelectList)
+            {
+                <option value="@meslek.Value" @(Request.QueryString["meslek_id"] == meslek.Value ? "selected" : "")>
+                    @meslek.Text
+                </option>
+            }
+        </select>
+    </form>
+</div>
+<b>Personel;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>TC No</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Meslek</th>
+        <th>Departman</th>
+        <th>Durum</th>
+        <th>Giriş Tarihi</th>
+        <th>Bilgi</th>
+        <th>Adres</th>
+    </tr>
+    <tbody>
+        @foreach (var personel in Model)
+        {
+            <tr>
+                <td>@personel.personel_tcno</td>
+                <td>@personel.personel_ad</td>
+                <td>@personel.personel_soyad</td>
+                <td>@personel.Meslek.meslek_ad</td>
+                <td>@personel.Departman.departman_ad</td>
+                <td>@(personel.personel_durum ? "Aktif" : "Pasif")</td>
+                <td>@personel.personel_giris_tarihi</td>
+                <td><a href="@Url.Action("PersonelBilgi", "Personel", new { id = personel.personel_id })" class="btn btn-warning">🔍</a></td>
+                <td><a href="@Url.Action("AdresBilgi", "Adres", new { id = personel.adres_id })" class="btn btn-warning" target="_blank">🗺️</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>

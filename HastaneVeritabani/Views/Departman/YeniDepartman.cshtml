@@ -1,0 +1,22 @@
+﻿
+@{
+    ViewBag.Title = "YeniDepartman";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Yeni Departman Ekle</h2>
+        <div class="form-item">
+            <label for="departman_ad">Adı</label>
+            <input type="text" class="input-dark-theme" name="departman_ad" required placeholder="Departman Adı" />
+        </div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>

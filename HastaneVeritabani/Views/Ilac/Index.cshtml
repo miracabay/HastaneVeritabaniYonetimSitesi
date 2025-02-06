@@ -1,0 +1,52 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<IlacReceteViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet ilaç kaydı bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Ilac/YeniIlac" class="btn btn-success">Yeni İlaç Ekle</a>
+</div>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="İlaç adı ara" value="@ViewBag.Arama" />
+        <button type="submit" class="btn btn-warning">Ara</button>
+        <a href="/Ilac/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+</div>
+
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <thead>
+        <tr>
+            <th>Adı</th>
+            <th>Barkodu</th>
+            <th>Kesilmiş Reçete Sayısı</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Ilac.ilac_ad</td>
+                <td>@item.Ilac.ilac_barkod</td>
+                <td>@item.ReceteSayi</td>
+                <td style="text-align: right;">
+                    <a href="@Url.Action("Sil", "Ilac", new { id = item.Ilac.ilac_id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>

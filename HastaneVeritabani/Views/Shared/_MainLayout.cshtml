@@ -1,0 +1,127 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Hastane Veritabanı</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link href="~/Content/styles.css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-color: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .navbar-inverse {
+            border-radius: 0;
+            background-color: #1e1e1e;
+            border-color: #333333;
+        }
+
+            .navbar-inverse .navbar-brand,
+            .navbar-inverse .nav > li > a {
+                color: #ffffff;
+            }
+
+                .navbar-inverse .navbar-brand:hover,
+                .navbar-inverse .nav > li > a:hover {
+                    color: #dddddd;
+                }
+
+        .container {
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/Home/Index" style="padding: 20px;">Hastane Veritabanı</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Acil İşlemleri</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("YeniAcilKayit", "AcilKayit")">Acil Hasta Kayıt</a></li>
+                        <li><a href="@Url.Action("AktifAcilKayitlar", "AcilKayit")">Aktif Kayıtlar</a></li>
+                        <li><a href="@Url.Action("GecmisAcilKayitlar", "AcilKayit")">Geçmiş Kayıtlar</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Randevu İşlemleri</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("YeniRandevu", "Randevu")">Yeni Randevu Kayıt</a></li>
+                        <li><a href="@Url.Action("AktifRandevular", "Randevu")">Aktif Randevular</a></li>
+                        <li><a href="@Url.Action("GecmisRandevular", "Randevu")">Geçmiş Randevular</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Hasta İşlemleri</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Hasta/YeniHasta">Hasta Kayıt</a></li>
+                        <li><a href="/Hasta/Index">Hasta Bilgileri</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Tahlil İşlemleri</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("YeniSonuc", "Sonuc")">Yeni Tahlil Girişi</a></li>
+                        <li><a href="@Url.Action("CikmisSonuclar", "Sonuc")">Sonuçlanmış Tahlil Sorgulama</a></li>
+                        <li><a href="@Url.Action("BekleyenSonuclar", "Sonuc")">Sonuç Bekleyen Tahlil Sorgulama</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Reçete/İlaç İşlemleri</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Recete/YeniRecete">Yeni Reçete Girişi</a></li>
+                        <li><a href="/Recete/Index">Reçete Sorgulama</a></li>
+                        <li><a href="/Ilac/Index">İlaç Sorgulama</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Malzeme Yönetimi</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("MalzemeAlim", "Malzeme")">Malzeme Alım Kayıtları</a></li>
+                        <li><a href="@Url.Action("MalzemeKullanim", "Malzeme")">Malzeme Kullanım Kayıtları</a></li>
+                        <li><a href="@Url.Action("MalzemeStok", "Malzeme")">Malzeme Stok</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="javascript:void(0);" class="dropdown-toggle" style="font-size: 13px;">Yönetici Paneli</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/Yönetici/Index">Yönetici İşlemleri</a></li>
+                        <li><a href="/Personel/Index">Personel Yönetimi</a></li>
+                        <li><a href="/Departman/Index">Departman Yönetimi</a></li>
+                        <li><a href="/Meslek/Index">Meslek Yönetimi</a></li>
+                        <li><a href="/Bütce/Index">Bütçe Yönetimi</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="@Url.Action("Logout", "Account")">
+                        <span class="glyphicon glyphicon-log-in"></span> Çıkış Yap
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        @RenderBody()
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Sonuc>
+@{
+    ViewBag.Title = "CikmisSonuclar";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet sonuçlanmış tahlil kaydı bulundu.</h3>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Hasta/Doktor/Kayıt No ara" onclick="this.select() " value="@ViewBag.arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Sonuc/CikmisSonuclar" class="btn btn-primary">Sıfırla</a>
+    </form>
+    <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+        <span style="opacity: 0.5;">Departman:</span>
+        <select name="departman_id" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var departman in ViewBag.departmanListesi as SelectList)
+            {
+                <option value="@departman.Value" @(Request.QueryString["departman_id"] == departman.Value ? "selected" : "")>
+                    @departman.Text
+                </option>
+            }
+        </select>
+        <span style="opacity: 0.5;">Tahlil Türü:</span>
+        <select name="test_tipi" class="form-control" onchange="this.form.submit()">
+            <option value="">Hepsi</option>
+            @foreach (var test_tipi in (List<string>)ViewBag.testTipleri)
+            {
+                <option value="@test_tipi" @(test_tipi == (string)ViewBag.secilenTestTipi ? "selected" : "")>@test_tipi</option>
+            }
+        </select>
+    </form>
+</div>
+<br />
+<b>Tahlil;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Acil/Randevu Kayıt No</th>
+        <th>Departman Ad</th>
+        <th>Hasta TC No</th>
+        <th>Doktor TC No</th>
+        <th>Tahlil Türü</th>
+        <th>Test Yapılma Tarihi</th>
+        <th>Sonuç Çıkış Tarihi</th>
+        <th>Bilgi</th>
+    </tr>
+    <tbody>
+        @foreach (var cikmisSonuc in Model)
+        {
+            <tr>
+                @if (cikmisSonuc.acil_id != null)
+                {
+                    <td>@cikmisSonuc.acil_id</td>
+                    <td>Acil</td>
+                    <td>@cikmisSonuc.Acil_Kayit.Hasta.hasta_tcno</td>
+                    <td>@cikmisSonuc.Acil_Kayit.Personel.personel_tcno</td>
+                }
+                @if (cikmisSonuc.randevu_id != null)
+                {
+                    <td>@cikmisSonuc.randevu_id</td>
+                    <td>@cikmisSonuc.Randevu.Departman.departman_ad</td>
+                    <td>@cikmisSonuc.Randevu.Hasta.hasta_tcno</td>
+                    <td>@cikmisSonuc.Randevu.Personel.personel_tcno</td>
+                }
+                <td>@cikmisSonuc.sonuc_test_tipi</td>
+                <td>@cikmisSonuc.sonuc_test_tarih</td>
+                <td>@cikmisSonuc.sonuc_cikis_tarih</td>
+                <td><a href="@Url.Action("SonucBilgi", "Sonuc", new { id = cikmisSonuc.sonuc_id })" class="btn btn-warning">🔍</a></td>
+                <td><a href="@Url.Action("CikmisSonucSil", "Sonuc", new { id = cikmisSonuc.sonuc_id })" class="btn btn-danger">Sil</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, page => Url.Action("CikmisSonuclar,", "Sonuc", new { sayfa = page, arama = ViewBag.arama }))
+</div>

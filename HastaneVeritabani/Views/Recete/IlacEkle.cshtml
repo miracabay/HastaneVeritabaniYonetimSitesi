@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "IlacEkle";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="center-form-container">
+    <form class="form-group form-container" method="post">
+        <h2 style="text-align: center; margin-bottom: 20px;">Reçeteye İlaç Ekle</h2>
+        <div class="form-item">
+            <label for="ilac_id">İlaç Adı</label>
+            <select name="ilac_id" class="select-dark-theme" required>
+                <option value="" disabled selected>İlaç Adı</option>
+                @foreach (var ilac in ViewBag.ilaclar as SelectList)
+                {
+                    <option value="@ilac.Value">@ilac.Text</option>
+                }
+            </select>
+        </div>
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div style="color: red; text-align: center;">@ViewBag.ErrorMessage</div>
+        }
+        <div style="text-align: center; margin-top: 20px;">
+            <button class="btn btn-primary" onclick="return confirm('Eklemek istediğinize emin misiniz?');">Ekle</button>
+        </div>
+    </form>
+</div>

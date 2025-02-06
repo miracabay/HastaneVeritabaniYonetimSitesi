@@ -1,0 +1,46 @@
+﻿@model List<HastaneVeritabani.Models.Entity.sp_MeslekBilgi_Result>
+
+@{
+    ViewBag.Title = "MeslekBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+@foreach (var meslekBilgi in Model)
+{
+    <h3><i>@meslekBilgi.MeslekAd</i> meslek bilgileri</h3>
+    <h4>Meslek Maaşı: <i>@meslekBilgi.MeslekMaas ₺</i></h4>
+    <br>
+    <br>
+    <br>
+
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+        <tr>
+            <th>Aktif Personel Sayısı</th>
+            <td>@meslekBilgi.PersonelAktifToplamSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Toplam Personel Sayısı</th>
+            <td>@meslekBilgi.PersonelToplamSayi</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Aktif Personel Maaşı</th>
+            <td>@meslekBilgi.PersonelAktifToplamMaas ₺</td>
+        </tr>
+        <tbody><tr></tr></tbody>
+        <tr>
+            <th>Toplam Personel Maaşı</th>
+            <td>@meslekBilgi.PersonelToplamMaas ₺</td>
+        </tr>
+    </table>
+    <div class="center-form-container">
+        <a href="@Url.Action("Index", "Meslek")" class="btn btn-warning"> Geri </a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("Sil", "Meslek", new { id = meslekBilgi.MeslekID })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+        <span style="margin-right:5px;"></span>
+        <a href="@Url.Action("MeslekGetir", "Meslek", new { id = meslekBilgi.MeslekID })" class="btn btn-primary">Güncelle</a>
+
+
+    </div>
+}

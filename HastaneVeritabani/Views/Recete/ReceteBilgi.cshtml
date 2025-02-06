@@ -1,0 +1,69 @@
+﻿@model HastaneVeritabani.Models.Entity.Recete
+
+@{
+    ViewBag.Title = "ReceteBilgi";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h4>
+    @if (ViewBag.Tip == "Acil")
+    {
+        <i>@Model.Acil_Kayit.Hasta.hasta_tcno</i> @:TC Numaralı
+        <i>@Model.Acil_Kayit.Hasta.hasta_ad</i> <i>@Model.Acil_Kayit.Hasta.hasta_soyad</i> @:isimli hastaya ait,
+        <br />
+        <br />
+        <i>@Model.Acil_Kayit.Personel.personel_tcno</i> @:TC Numaralı
+        <i>@Model.Acil_Kayit.Personel.personel_ad</i> <i>@Model.Acil_Kayit.Personel.personel_soyad</i> @:isimli doktor tarafından
+        <i>@Model.Acil_Kayit.acil_giris_tarihi</i> @:tarihinde yazılan
+    }
+    else if (ViewBag.Tip == "Randevu")
+    {
+        <i>@Model.Randevu.Hasta.hasta_tcno</i> @:TC Numaralı
+        <i>@Model.Randevu.Hasta.hasta_ad</i> <i>@Model.Randevu.Hasta.hasta_soyad</i> @:isimli hastaya ait,
+        <br />
+        <br />
+        <i>@Model.Randevu.Personel.personel_tcno</i> @:TC Numaralı
+        <i>@Model.Randevu.Personel.personel_ad</i> <i>@Model.Randevu.Personel.personel_soyad</i> @:isimli doktor tarafından
+        <i>@Model.Randevu.randevu_tarih</i> @:tarihinde yazılan
+    }
+    <br /><br />Reçete için ilaç bilgileri şu şekildedir:
+</h4>
+
+<div style="text-align: right;">
+    <a href="@Url.Action("IlacEkle", "Recete", new { id = Model.recete_id })" class="btn btn-success">Yeni İlaç Ekle</a>
+</div>
+
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%;">
+    <thead>
+        <tr>
+            <th>İlaç Adı</th>
+            <th>İlaç Barkodu</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.Ilac_Recete != null && Model.Ilac_Recete.Any())
+        {
+            foreach (var ilacRecete in Model.Ilac_Recete)
+            {
+                <tr>
+                    <td>@ilacRecete.Ilac.ilac_ad</td>
+                    <td>@ilacRecete.Ilac.ilac_barkod</td>
+                    <td style="text-align: right;">
+                        <a href="@Url.Action("IlacSil", "Recete", new { id = ilacRecete.ilac_recete_id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="3" style="color:darkred;">Bu reçeteye ait ilaç bilgisi bulunmamaktadır.</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div class="center-form-container">
+    <a href="@Url.Action("Index", "Recete")" class="btn btn-warning"> Geri </a>
+</div>

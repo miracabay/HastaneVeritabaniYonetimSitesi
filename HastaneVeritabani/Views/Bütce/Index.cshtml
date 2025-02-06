@@ -1,0 +1,98 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Bütce>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet bütçe kaydı bulundu.</h3>
+<div style="text-align: right;">
+    <a href="/Bütce/PersonelMaas" class="btn btn-warning">Personel Maaşı Öde</a>
+</div>
+<div style="text-align: right; padding-top:10px; color: deepskyblue;">
+    (Yalnızca aktif personeller için toplam maaş ödeme işlemi)
+</div>
+    <br />
+    <div style="text-align: right;">
+        <a href="/Bütce/YeniBütce" class="btn btn-success">Yeni Bütçe Kaydı Oluştur</a>
+    </div>
+
+    <div style="text-align: right; padding-top: 5px;">
+        <form asp-action="Index" method="get" class="form-inline" style="padding-top: 15px;">
+            <span style="opacity: 0.5;">Tip:</span>
+            <select name="bütce_tipi" class="form-control" onchange="this.form.submit()">
+                <option value="">Hepsi</option>
+                <option value="gelir" @(ViewBag.secilenTip == "gelir" ? "selected" : "")>Gelir</option>
+                <option value="gider" @(ViewBag.secilenTip == "gider" ? "selected" : "")>Gider</option>
+            </select>
+
+            <span style="opacity: 0.5;">Kategori:</span>
+            <select name="bütce_kategori" class="form-control" onchange="this.form.submit()">
+                <option value="">Hepsi</option>
+                @foreach (var kategori in (List<string>)ViewBag.kategoriler)
+                {
+                    <option value="@kategori" @(kategori == (string)ViewBag.secilenKategori ? "selected" : "")>@kategori</option>
+                }
+            </select>
+
+            <a href="/Bütce/Index" class="btn btn-primary">Sıfırla</a>
+        </form>
+    </div>
+    <br />
+    <div style="color: deepskyblue; text-align: right;">Malzeme Alım kayıtları için ekleme ve silme işlemleri</div>
+    <div style="color: deepskyblue; text-align: right;">sistem tarafından otomatik olarak yapılmaktadır.</div>
+    <br />
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+        <tr>
+            <th>Toplam Gelir:</th>
+            <td style="color: green;">@ViewBag.toplamGelir.ToString("N", System.Globalization.CultureInfo.GetCultureInfo("tr-TR")) ₺</td>
+        </tr>
+        <tr>
+            <th>Toplam Gider:</th>
+            <td style="color: darkred;">@ViewBag.toplamGider.ToString("N", System.Globalization.CultureInfo.GetCultureInfo("tr-TR")) ₺</td>
+        </tr>
+        <tr>
+            <th>Toplam Bütçe:</th>
+            <td>@ViewBag.toplamBütce.ToString("N", System.Globalization.CultureInfo.GetCultureInfo("tr-TR")) ₺</td>
+        </tr>
+    </table>
+
+    <b>Bütçe;</b>
+    <table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+        <tr>
+            <th>Tip</th>
+            <th>Kategori</th>
+            <th>Toplam tutar</th>
+            <th>İşlem Tarihi</th>
+        </tr>
+        <tbody>
+            @foreach (var bütce in Model)
+            {
+                <tr>
+                    <td>@(bütce.bütce_tipi ? "Gelir" : "Gider")</td>
+                    <td>@bütce.bütce_kategori</td>
+                    <td>@bütce.bütce_tutar.ToString("N", System.Globalization.CultureInfo.GetCultureInfo("tr-TR")) ₺</td>
+                    <td>@bütce.bütce_tarihi</td>
+                    @if (@bütce.bütce_kategori != "Malzeme Alım")
+                    {
+                        <td>
+                            <a href="@Url.Action("Sil", "Bütce", new { id = bütce.bütce_id })"
+                               class="btn btn-danger"
+                               onclick="return confirm('Silmek istediğinize emin misiniz?');">
+                                Sil
+                            </a>
+                        </td>
+                    }
+                    else
+                    {
+                        <td>
+                            <span style="display: inline-block; height: 30px; visibility: hidden;"></span>
+                        </td>
+                    }
+                </tr>
+            }
+        </tbody>
+    </table>

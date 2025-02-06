@@ -1,0 +1,1792 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HastaneVeritabaniModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Acil_Kayit">
+          <Key>
+            <PropertyRef Name="acil_id" />
+          </Key>
+          <Property Name="acil_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="acil_giris_tarihi" Type="datetime" />
+          <Property Name="acil_cikis_tarihi" Type="datetime" />
+          <Property Name="acil_tani" Type="text" Nullable="false" />
+          <Property Name="personel_id" Type="int" Nullable="false" />
+          <Property Name="hasta_id" Type="int" Nullable="false" />
+          <Property Name="acil_kayit_durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="adres_id" />
+          </Key>
+          <Property Name="adres_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sehir" Type="varchar" MaxLength="50" />
+          <Property Name="ilce" Type="varchar" MaxLength="50" />
+          <Property Name="mahalle" Type="varchar" MaxLength="50" />
+          <Property Name="sokak" Type="varchar" MaxLength="50" />
+          <Property Name="bina" Type="varchar" MaxLength="30" />
+          <Property Name="daire" Type="varchar" MaxLength="30" />
+        </EntityType>
+        <EntityType Name="Bütce">
+          <Key>
+            <PropertyRef Name="bütce_id" />
+          </Key>
+          <Property Name="bütce_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bütce_tutar" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="bütce_kategori" Type="varchar" MaxLength="20" />
+          <Property Name="bütce_tipi" Type="bit" Nullable="false" />
+          <Property Name="bütce_tarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Departman">
+          <Key>
+            <PropertyRef Name="departman_id" />
+          </Key>
+          <Property Name="departman_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="departman_ad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="departman_durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hasta">
+          <Key>
+            <PropertyRef Name="hasta_id" />
+          </Key>
+          <Property Name="hasta_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="hasta_ad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="hasta_soyad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="hasta_tcno" Type="char" MaxLength="11" Nullable="false" />
+          <Property Name="hasta_cinsiyet" Type="bit" Nullable="false" />
+          <Property Name="hasta_dogum_tarihi" Type="date" Nullable="false" />
+          <Property Name="hasta_telefon" Type="varchar" MaxLength="14" Nullable="false" />
+          <Property Name="adres_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Ilac">
+          <Key>
+            <PropertyRef Name="ilac_id" />
+          </Key>
+          <Property Name="ilac_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ilac_ad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="ilac_barkod" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Ilac_Recete">
+          <Key>
+            <PropertyRef Name="ilac_recete_id" />
+          </Key>
+          <Property Name="ilac_recete_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="recete_id" Type="int" Nullable="false" />
+          <Property Name="ilac_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Malzeme_Alim">
+          <Key>
+            <PropertyRef Name="alim_id" />
+          </Key>
+          <Property Name="alim_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="alim_firma" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="alim_adet" Type="int" Nullable="false" />
+          <Property Name="alim_fiyat" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="alim_tarihi" Type="datetime" />
+          <Property Name="malzeme_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Malzeme_Kullanim">
+          <Key>
+            <PropertyRef Name="kullanim_id" />
+          </Key>
+          <Property Name="kullanim_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanim_adet" Type="int" />
+          <Property Name="kullanim_tarihi" Type="datetime" />
+          <Property Name="malzeme_id" Type="int" />
+          <Property Name="acil_id" Type="int" />
+          <Property Name="randevu_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Malzeme_Stok">
+          <Key>
+            <PropertyRef Name="malzeme_id" />
+          </Key>
+          <Property Name="malzeme_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="malzeme_ad" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="malzeme_adet" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Meslek">
+          <Key>
+            <PropertyRef Name="meslek_id" />
+          </Key>
+          <Property Name="meslek_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="meslek_ad" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="meslek_maas" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="personel_id" />
+          </Key>
+          <Property Name="personel_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="personel_ad" Type="varchar" MaxLength="30" />
+          <Property Name="personel_soyad" Type="varchar" MaxLength="30" />
+          <Property Name="personel_tcno" Type="char" MaxLength="11" />
+          <Property Name="personel_cinsiyet" Type="bit" Nullable="false" />
+          <Property Name="personel_dogum_tarihi" Type="date" Nullable="false" />
+          <Property Name="personel_telefon" Type="char" MaxLength="14" />
+          <Property Name="personel_giris_tarihi" Type="datetime" />
+          <Property Name="adres_id" Type="int" />
+          <Property Name="meslek_id" Type="int" />
+          <Property Name="departman_id" Type="int" />
+          <Property Name="personel_durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Randevu">
+          <Key>
+            <PropertyRef Name="randevu_id" />
+          </Key>
+          <Property Name="randevu_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="randevu_tarih" Type="datetime" Nullable="false" />
+          <Property Name="hasta_id" Type="int" />
+          <Property Name="personel_id" Type="int" />
+          <Property Name="departman_id" Type="int" />
+          <Property Name="randevu_durum" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Recete">
+          <Key>
+            <PropertyRef Name="recete_id" />
+          </Key>
+          <Property Name="recete_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="recete_son_kullanim_tarihi" Type="date" Nullable="false" />
+          <Property Name="recete_durum" Type="bit" Nullable="false" />
+          <Property Name="acil_id" Type="int" />
+          <Property Name="randevu_id" Type="int" />
+        </EntityType>
+        <EntityType Name="Sonuc">
+          <Key>
+            <PropertyRef Name="sonuc_id" />
+          </Key>
+          <Property Name="sonuc_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sonuc_test_tarih" Type="datetime" />
+          <Property Name="sonuc_cikis_tarih" Type="datetime" />
+          <Property Name="sonuc_aciklama" Type="text" Nullable="false" />
+          <Property Name="sonuc_test_tipi" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="sonuc_durum" Type="bit" Nullable="false" />
+          <Property Name="acil_id" Type="int" />
+          <Property Name="randevu_id" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Yönetici">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanici_adi" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="sifre" Type="varchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HastaneVeritabani.dbo.AnaSayfa' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="AnaSayfa">
+          <Property Name="AnaSayfaID" Type="bigint" />
+          <Property Name="aktifDepartmanSayi" Type="int" />
+          <Property Name="yöneticiSayi" Type="int" />
+          <Property Name="aktifPersonelSayi" Type="int" />
+          <Property Name="hastaSayi" Type="int" />
+          <Property Name="acilRandevuSayi" Type="int" />
+          <Property Name="ilacReceteSayi" Type="int" />
+          <Property Name="sonucSayi" Type="int" />
+          <Property Name="malzemeIslemSayi" Type="int" />
+          <Property Name="adresSayi" Type="int" />
+          <Property Name="bütceMeslekSayi" Type="int" />
+        </EntityType>-->
+        <Association Name="FK_Acil_Kayit_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="hasta_id" />
+            </Principal>
+            <Dependent Role="Acil_Kayit">
+              <PropertyRef Name="hasta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acil_Kayit_Personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="Acil_Kayit">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hasta_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="adres_id" />
+            </Principal>
+            <Dependent Role="Hasta">
+              <PropertyRef Name="adres_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilac_Recete_Ilac">
+          <End Role="Ilac" Type="Self.Ilac" Multiplicity="0..1" />
+          <End Role="Ilac_Recete" Type="Self.Ilac_Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilac">
+              <PropertyRef Name="ilac_id" />
+            </Principal>
+            <Dependent Role="Ilac_Recete">
+              <PropertyRef Name="ilac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilac_Recete_Recete">
+          <End Role="Recete" Type="Self.Recete" Multiplicity="1" />
+          <End Role="Ilac_Recete" Type="Self.Ilac_Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recete">
+              <PropertyRef Name="recete_id" />
+            </Principal>
+            <Dependent Role="Ilac_Recete">
+              <PropertyRef Name="recete_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Alim_Malzeme_Stok">
+          <End Role="Malzeme_Stok" Type="Self.Malzeme_Stok" Multiplicity="0..1" />
+          <End Role="Malzeme_Alim" Type="Self.Malzeme_Alim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Malzeme_Stok">
+              <PropertyRef Name="malzeme_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Alim">
+              <PropertyRef Name="malzeme_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Kullanim_Acil_Kayit">
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="0..1" />
+          <End Role="Malzeme_Kullanim" Type="Self.Malzeme_Kullanim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acil_Kayit">
+              <PropertyRef Name="acil_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Kullanim">
+              <PropertyRef Name="acil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Kullanim_Malzeme_Stok">
+          <End Role="Malzeme_Stok" Type="Self.Malzeme_Stok" Multiplicity="0..1" />
+          <End Role="Malzeme_Kullanim" Type="Self.Malzeme_Kullanim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Malzeme_Stok">
+              <PropertyRef Name="malzeme_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Kullanim">
+              <PropertyRef Name="malzeme_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Kullanim_Randevu">
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="0..1" />
+          <End Role="Malzeme_Kullanim" Type="Self.Malzeme_Kullanim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Randevu">
+              <PropertyRef Name="randevu_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Kullanim">
+              <PropertyRef Name="randevu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="adres_id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="adres_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Departman">
+          <End Role="Departman" Type="Self.Departman" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departman">
+              <PropertyRef Name="departman_id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="departman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Meslek">
+          <End Role="Meslek" Type="Self.Meslek" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meslek">
+              <PropertyRef Name="meslek_id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="meslek_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Departman">
+          <End Role="Departman" Type="Self.Departman" Multiplicity="0..1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departman">
+              <PropertyRef Name="departman_id" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="departman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="0..1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="hasta_id" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="hasta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="0..1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Acil_Kayit1">
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acil_Kayit">
+              <PropertyRef Name="acil_id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="acil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Randevu">
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Randevu">
+              <PropertyRef Name="randevu_id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="randevu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sonuc_Acil_Kayit">
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="0..1" />
+          <End Role="Sonuc" Type="Self.Sonuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acil_Kayit">
+              <PropertyRef Name="acil_id" />
+            </Principal>
+            <Dependent Role="Sonuc">
+              <PropertyRef Name="acil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sonuc_Randevu">
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="0..1" />
+          <End Role="Sonuc" Type="Self.Sonuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Randevu">
+              <PropertyRef Name="randevu_id" />
+            </Principal>
+            <Dependent Role="Sonuc">
+              <PropertyRef Name="randevu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="fn_DepartmanMalzemeKullanimSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_DepartmanReceteSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_DepartmanSonucSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+        <Function Name="fn_HastaMalzemeKullanimSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="HastaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_HastaReceteSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="HastaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_HastaSonucSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="HastaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_HastaToplamKayitRandevuSayi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HastaID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="HastaAktifKayitSayi" Type="int" Nullable="false" />
+                <Property Name="HastaToplamKayitSayi" Type="int" Nullable="false" />
+                <Property Name="HastaAktifRandevuSayi" Type="int" Nullable="false" />
+                <Property Name="HastaToplamRandevuSayi" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_IlacReceteSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="IlacID" Type="int" Nullable="false" />
+                <Property Name="IlacReceteSayi" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_MeslekPersonelMaasHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MeslekID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="PersonelAktifToplamMaas" Type="decimal" Precision="29" Scale="2" Nullable="false" />
+                <Property Name="PersonelToplamMaas" Type="decimal" Precision="29" Scale="2" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_MeslekPersonelSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MeslekID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="PersonelAktifToplamSayi" Type="int" Nullable="false" />
+                <Property Name="PersonelToplamSayi" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_PersonelMalzemeKullanimSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="PersonelID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_PersonelReceteSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="PersonelID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_PersonelSonucSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int">
+          <Parameter Name="PersonelID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="fn_ToplamKayitRandevuHastaSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+          <Parameter Name="PersonelID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="KayitRandevuHastaAktifToplamSayi" Type="int" Nullable="false" />
+                <Property Name="KayitRandevuHastaToplamSayi" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_ToplamPersonelMaasiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="PersonelAktifToplamMaas" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+                <Property Name="PersonelToplamMaas" Type="decimal" Precision="38" Scale="2" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="fn_ToplamPersonelSayiHesapla" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+          <ReturnType>
+            <CollectionType>
+              <RowType>
+                <Property Name="PersonelAktifToplamSayi" Type="int" Nullable="false" />
+                <Property Name="PersonelToplamSayi" Type="int" Nullable="false" />
+              </RowType>
+            </CollectionType>
+          </ReturnType>
+        </Function>
+        <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_AnaSayfa" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="version" Type="int" Mode="In" />
+          <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="sp_DepartmanBilgi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DepartmanID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_HastaBilgi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="HastaID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_MeslekBilgi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="MeslekID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_PersonelBilgi" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PersonelID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+          <Parameter Name="owner_id" Type="int" Mode="In" />
+          <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="HastaneVeritabaniModelStoreContainer">
+          <EntitySet Name="Acil_Kayit" EntityType="Self.Acil_Kayit" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Adres" EntityType="Self.Adres" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Bütce" EntityType="Self.Bütce" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departman" EntityType="Self.Departman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Hasta" EntityType="Self.Hasta" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilac" EntityType="Self.Ilac" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ilac_Recete" EntityType="Self.Ilac_Recete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Malzeme_Alim" EntityType="Self.Malzeme_Alim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Malzeme_Kullanim" EntityType="Self.Malzeme_Kullanim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Malzeme_Stok" EntityType="Self.Malzeme_Stok" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Meslek" EntityType="Self.Meslek" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Randevu" EntityType="Self.Randevu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Recete" EntityType="Self.Recete" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sonuc" EntityType="Self.Sonuc" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Yönetici" EntityType="Self.Yönetici" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Acil_Kayit_Hasta" Association="Self.FK_Acil_Kayit_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acil_Kayit_Personel" Association="Self.FK_Acil_Kayit_Personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hasta_Adres" Association="Self.FK_Hasta_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Hasta" EntitySet="Hasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilac_Recete_Ilac" Association="Self.FK_Ilac_Recete_Ilac">
+            <End Role="Ilac" EntitySet="Ilac" />
+            <End Role="Ilac_Recete" EntitySet="Ilac_Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilac_Recete_Recete" Association="Self.FK_Ilac_Recete_Recete">
+            <End Role="Recete" EntitySet="Recete" />
+            <End Role="Ilac_Recete" EntitySet="Ilac_Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Alim_Malzeme_Stok" Association="Self.FK_Malzeme_Alim_Malzeme_Stok">
+            <End Role="Malzeme_Stok" EntitySet="Malzeme_Stok" />
+            <End Role="Malzeme_Alim" EntitySet="Malzeme_Alim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Kullanim_Acil_Kayit" Association="Self.FK_Malzeme_Kullanim_Acil_Kayit">
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+            <End Role="Malzeme_Kullanim" EntitySet="Malzeme_Kullanim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Kullanim_Malzeme_Stok" Association="Self.FK_Malzeme_Kullanim_Malzeme_Stok">
+            <End Role="Malzeme_Stok" EntitySet="Malzeme_Stok" />
+            <End Role="Malzeme_Kullanim" EntitySet="Malzeme_Kullanim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Kullanim_Randevu" Association="Self.FK_Malzeme_Kullanim_Randevu">
+            <End Role="Randevu" EntitySet="Randevu" />
+            <End Role="Malzeme_Kullanim" EntitySet="Malzeme_Kullanim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Adres" Association="Self.FK_Personel_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Departman" Association="Self.FK_Personel_Departman">
+            <End Role="Departman" EntitySet="Departman" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Meslek" Association="Self.FK_Personel_Meslek">
+            <End Role="Meslek" EntitySet="Meslek" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Departman" Association="Self.FK_Randevu_Departman">
+            <End Role="Departman" EntitySet="Departman" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Hasta" Association="Self.FK_Randevu_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Personel" Association="Self.FK_Randevu_Personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Acil_Kayit1" Association="Self.FK_Recete_Acil_Kayit1">
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Randevu" Association="Self.FK_Recete_Randevu">
+            <End Role="Randevu" EntitySet="Randevu" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sonuc_Acil_Kayit" Association="Self.FK_Sonuc_Acil_Kayit">
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+            <End Role="Sonuc" EntitySet="Sonuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sonuc_Randevu" Association="Self.FK_Sonuc_Randevu">
+            <End Role="Randevu" EntitySet="Randevu" />
+            <End Role="Sonuc" EntitySet="Sonuc" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HastaneVeritabaniModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <ComplexType Name="fn_HastaToplamKayitRandevuSayi_Result">
+          <Property Name="HastaAktifKayitSayi" Type="Int32" Nullable="false" />
+          <Property Name="HastaToplamKayitSayi" Type="Int32" Nullable="false" />
+          <Property Name="HastaAktifRandevuSayi" Type="Int32" Nullable="false" />
+          <Property Name="HastaToplamRandevuSayi" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_IlacReceteSayiHesapla_Result">
+          <Property Name="IlacID" Type="Int32" Nullable="false" />
+          <Property Name="IlacReceteSayi" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_MeslekPersonelMaasHesapla_Result">
+          <Property Name="PersonelAktifToplamMaas" Type="Decimal" Precision="29" Scale="2" Nullable="false" />
+          <Property Name="PersonelToplamMaas" Type="Decimal" Precision="29" Scale="2" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_MeslekPersonelSayiHesapla_Result">
+          <Property Name="PersonelAktifToplamSayi" Type="Int32" Nullable="false" />
+          <Property Name="PersonelToplamSayi" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_ToplamKayitRandevuHastaSayiHesapla_Result">
+          <Property Name="KayitRandevuHastaAktifToplamSayi" Type="Int32" Nullable="false" />
+          <Property Name="KayitRandevuHastaToplamSayi" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_ToplamPersonelMaasiHesapla_Result">
+          <Property Name="PersonelAktifToplamMaas" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+          <Property Name="PersonelToplamMaas" Type="Decimal" Precision="38" Scale="2" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="fn_ToplamPersonelSayiHesapla_Result">
+          <Property Name="PersonelAktifToplamSayi" Type="Int32" Nullable="false" />
+          <Property Name="PersonelToplamSayi" Type="Int32" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="Acil_Kayit">
+          <Key>
+            <PropertyRef Name="acil_id" />
+          </Key>
+          <Property Name="acil_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="acil_giris_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="acil_cikis_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="acil_tani" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="personel_id" Type="Int32" Nullable="false" />
+          <Property Name="hasta_id" Type="Int32" Nullable="false" />
+          <Property Name="acil_kayit_durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_Acil_Kayit_Hasta" FromRole="Acil_Kayit" ToRole="Hasta" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Acil_Kayit_Personel" FromRole="Acil_Kayit" ToRole="Personel" />
+          <NavigationProperty Name="Malzeme_Kullanim" Relationship="Self.FK_Malzeme_Kullanim_Acil_Kayit" FromRole="Acil_Kayit" ToRole="Malzeme_Kullanim" />
+          <NavigationProperty Name="Recete" Relationship="Self.FK_Recete_Acil_Kayit1" FromRole="Acil_Kayit" ToRole="Recete" />
+          <NavigationProperty Name="Sonuc" Relationship="Self.FK_Sonuc_Acil_Kayit" FromRole="Acil_Kayit" ToRole="Sonuc" />
+        </EntityType>
+        <EntityType Name="Adres">
+          <Key>
+            <PropertyRef Name="adres_id" />
+          </Key>
+          <Property Name="adres_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sehir" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ilce" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mahalle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="sokak" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="bina" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="daire" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_Hasta_Adres" FromRole="Adres" ToRole="Hasta" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Adres" FromRole="Adres" ToRole="Personel" />
+        </EntityType>
+        <EntityType Name="Bütce">
+          <Key>
+            <PropertyRef Name="bütce_id" />
+          </Key>
+          <Property Name="bütce_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bütce_tutar" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="bütce_kategori" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="bütce_tipi" Type="Boolean" Nullable="false" />
+          <Property Name="bütce_tarihi" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Departman">
+          <Key>
+            <PropertyRef Name="departman_id" />
+          </Key>
+          <Property Name="departman_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="departman_ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="departman_durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Departman" FromRole="Departman" ToRole="Personel" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Departman" FromRole="Departman" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="Hasta">
+          <Key>
+            <PropertyRef Name="hasta_id" />
+          </Key>
+          <Property Name="hasta_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="hasta_ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hasta_soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="hasta_tcno" Type="String" MaxLength="11" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="hasta_cinsiyet" Type="Boolean" Nullable="false" />
+          <Property Name="hasta_dogum_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="hasta_telefon" Type="String" MaxLength="14" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="adres_id" Type="Int32" />
+          <NavigationProperty Name="Acil_Kayit" Relationship="Self.FK_Acil_Kayit_Hasta" FromRole="Hasta" ToRole="Acil_Kayit" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK_Hasta_Adres" FromRole="Hasta" ToRole="Adres" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Hasta" FromRole="Hasta" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="Ilac">
+          <Key>
+            <PropertyRef Name="ilac_id" />
+          </Key>
+          <Property Name="ilac_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ilac_ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ilac_barkod" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Ilac_Recete" Relationship="Self.FK_Ilac_Recete_Ilac" FromRole="Ilac" ToRole="Ilac_Recete" />
+        </EntityType>
+        <EntityType Name="Ilac_Recete">
+          <Key>
+            <PropertyRef Name="ilac_recete_id" />
+          </Key>
+          <Property Name="ilac_recete_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="recete_id" Type="Int32" Nullable="false" />
+          <Property Name="ilac_id" Type="Int32" />
+          <NavigationProperty Name="Ilac" Relationship="Self.FK_Ilac_Recete_Ilac" FromRole="Ilac_Recete" ToRole="Ilac" />
+          <NavigationProperty Name="Recete" Relationship="Self.FK_Ilac_Recete_Recete" FromRole="Ilac_Recete" ToRole="Recete" />
+        </EntityType>
+        <EntityType Name="Malzeme_Alim">
+          <Key>
+            <PropertyRef Name="alim_id" />
+          </Key>
+          <Property Name="alim_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="alim_firma" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="alim_adet" Type="Int32" Nullable="false" />
+          <Property Name="alim_fiyat" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <Property Name="alim_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="malzeme_id" Type="Int32" />
+          <NavigationProperty Name="Malzeme_Stok" Relationship="Self.FK_Malzeme_Alim_Malzeme_Stok" FromRole="Malzeme_Alim" ToRole="Malzeme_Stok" />
+        </EntityType>
+        <EntityType Name="Malzeme_Kullanim">
+          <Key>
+            <PropertyRef Name="kullanim_id" />
+          </Key>
+          <Property Name="kullanim_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanim_adet" Type="Int32" />
+          <Property Name="kullanim_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="malzeme_id" Type="Int32" />
+          <Property Name="acil_id" Type="Int32" />
+          <Property Name="randevu_id" Type="Int32" />
+          <NavigationProperty Name="Acil_Kayit" Relationship="Self.FK_Malzeme_Kullanim_Acil_Kayit" FromRole="Malzeme_Kullanim" ToRole="Acil_Kayit" />
+          <NavigationProperty Name="Malzeme_Stok" Relationship="Self.FK_Malzeme_Kullanim_Malzeme_Stok" FromRole="Malzeme_Kullanim" ToRole="Malzeme_Stok" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Malzeme_Kullanim_Randevu" FromRole="Malzeme_Kullanim" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="Malzeme_Stok">
+          <Key>
+            <PropertyRef Name="malzeme_id" />
+          </Key>
+          <Property Name="malzeme_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="malzeme_ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="malzeme_adet" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Malzeme_Alim" Relationship="Self.FK_Malzeme_Alim_Malzeme_Stok" FromRole="Malzeme_Stok" ToRole="Malzeme_Alim" />
+          <NavigationProperty Name="Malzeme_Kullanim" Relationship="Self.FK_Malzeme_Kullanim_Malzeme_Stok" FromRole="Malzeme_Stok" ToRole="Malzeme_Kullanim" />
+        </EntityType>
+        <EntityType Name="Meslek">
+          <Key>
+            <PropertyRef Name="meslek_id" />
+          </Key>
+          <Property Name="meslek_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="meslek_ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="meslek_maas" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Personel_Meslek" FromRole="Meslek" ToRole="Personel" />
+        </EntityType>
+        <EntityType Name="Personel">
+          <Key>
+            <PropertyRef Name="personel_id" />
+          </Key>
+          <Property Name="personel_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="personel_ad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="personel_soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="personel_tcno" Type="String" MaxLength="11" FixedLength="true" Unicode="false" />
+          <Property Name="personel_cinsiyet" Type="Boolean" Nullable="false" />
+          <Property Name="personel_dogum_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="personel_telefon" Type="String" MaxLength="14" FixedLength="true" Unicode="false" />
+          <Property Name="personel_giris_tarihi" Type="DateTime" Precision="3" />
+          <Property Name="adres_id" Type="Int32" />
+          <Property Name="meslek_id" Type="Int32" />
+          <Property Name="departman_id" Type="Int32" />
+          <Property Name="personel_durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Acil_Kayit" Relationship="Self.FK_Acil_Kayit_Personel" FromRole="Personel" ToRole="Acil_Kayit" />
+          <NavigationProperty Name="Adres" Relationship="Self.FK_Personel_Adres" FromRole="Personel" ToRole="Adres" />
+          <NavigationProperty Name="Departman" Relationship="Self.FK_Personel_Departman" FromRole="Personel" ToRole="Departman" />
+          <NavigationProperty Name="Meslek" Relationship="Self.FK_Personel_Meslek" FromRole="Personel" ToRole="Meslek" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Randevu_Personel" FromRole="Personel" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="Randevu">
+          <Key>
+            <PropertyRef Name="randevu_id" />
+          </Key>
+          <Property Name="randevu_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="randevu_tarih" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="hasta_id" Type="Int32" />
+          <Property Name="personel_id" Type="Int32" />
+          <Property Name="departman_id" Type="Int32" />
+          <Property Name="randevu_durum" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Departman" Relationship="Self.FK_Randevu_Departman" FromRole="Randevu" ToRole="Departman" />
+          <NavigationProperty Name="Hasta" Relationship="Self.FK_Randevu_Hasta" FromRole="Randevu" ToRole="Hasta" />
+          <NavigationProperty Name="Malzeme_Kullanim" Relationship="Self.FK_Malzeme_Kullanim_Randevu" FromRole="Randevu" ToRole="Malzeme_Kullanim" />
+          <NavigationProperty Name="Personel" Relationship="Self.FK_Randevu_Personel" FromRole="Randevu" ToRole="Personel" />
+          <NavigationProperty Name="Recete" Relationship="Self.FK_Recete_Randevu" FromRole="Randevu" ToRole="Recete" />
+          <NavigationProperty Name="Sonuc" Relationship="Self.FK_Sonuc_Randevu" FromRole="Randevu" ToRole="Sonuc" />
+        </EntityType>
+        <EntityType Name="Recete">
+          <Key>
+            <PropertyRef Name="recete_id" />
+          </Key>
+          <Property Name="recete_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="recete_son_kullanim_tarihi" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="recete_durum" Type="Boolean" Nullable="false" />
+          <Property Name="acil_id" Type="Int32" />
+          <Property Name="randevu_id" Type="Int32" />
+          <NavigationProperty Name="Acil_Kayit" Relationship="Self.FK_Recete_Acil_Kayit1" FromRole="Recete" ToRole="Acil_Kayit" />
+          <NavigationProperty Name="Ilac_Recete" Relationship="Self.FK_Ilac_Recete_Recete" FromRole="Recete" ToRole="Ilac_Recete" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Recete_Randevu" FromRole="Recete" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="Sonuc">
+          <Key>
+            <PropertyRef Name="sonuc_id" />
+          </Key>
+          <Property Name="sonuc_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sonuc_test_tarih" Type="DateTime" Precision="3" />
+          <Property Name="sonuc_cikis_tarih" Type="DateTime" Precision="3" />
+          <Property Name="sonuc_aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sonuc_test_tipi" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sonuc_durum" Type="Boolean" Nullable="false" />
+          <Property Name="acil_id" Type="Int32" />
+          <Property Name="randevu_id" Type="Int32" />
+          <NavigationProperty Name="Acil_Kayit" Relationship="Self.FK_Sonuc_Acil_Kayit" FromRole="Sonuc" ToRole="Acil_Kayit" />
+          <NavigationProperty Name="Randevu" Relationship="Self.FK_Sonuc_Randevu" FromRole="Sonuc" ToRole="Randevu" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Yönetici">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanici_adi" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="sifre" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Acil_Kayit_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="1" />
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="hasta_id" />
+            </Principal>
+            <Dependent Role="Acil_Kayit">
+              <PropertyRef Name="hasta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Acil_Kayit_Personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="1" />
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="Acil_Kayit">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Kullanim_Acil_Kayit">
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="0..1" />
+          <End Role="Malzeme_Kullanim" Type="Self.Malzeme_Kullanim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acil_Kayit">
+              <PropertyRef Name="acil_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Kullanim">
+              <PropertyRef Name="acil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Acil_Kayit1">
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acil_Kayit">
+              <PropertyRef Name="acil_id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="acil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sonuc_Acil_Kayit">
+          <End Role="Acil_Kayit" Type="Self.Acil_Kayit" Multiplicity="0..1" />
+          <End Role="Sonuc" Type="Self.Sonuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Acil_Kayit">
+              <PropertyRef Name="acil_id" />
+            </Principal>
+            <Dependent Role="Sonuc">
+              <PropertyRef Name="acil_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hasta_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="adres_id" />
+            </Principal>
+            <Dependent Role="Hasta">
+              <PropertyRef Name="adres_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Adres">
+          <End Role="Adres" Type="Self.Adres" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adres">
+              <PropertyRef Name="adres_id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="adres_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Departman">
+          <End Role="Departman" Type="Self.Departman" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departman">
+              <PropertyRef Name="departman_id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="departman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Departman">
+          <End Role="Departman" Type="Self.Departman" Multiplicity="0..1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departman">
+              <PropertyRef Name="departman_id" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="departman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Hasta">
+          <End Role="Hasta" Type="Self.Hasta" Multiplicity="0..1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hasta">
+              <PropertyRef Name="hasta_id" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="hasta_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilac_Recete_Ilac">
+          <End Role="Ilac" Type="Self.Ilac" Multiplicity="0..1" />
+          <End Role="Ilac_Recete" Type="Self.Ilac_Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ilac">
+              <PropertyRef Name="ilac_id" />
+            </Principal>
+            <Dependent Role="Ilac_Recete">
+              <PropertyRef Name="ilac_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ilac_Recete_Recete">
+          <End Role="Recete" Type="Self.Recete" Multiplicity="1" />
+          <End Role="Ilac_Recete" Type="Self.Ilac_Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Recete">
+              <PropertyRef Name="recete_id" />
+            </Principal>
+            <Dependent Role="Ilac_Recete">
+              <PropertyRef Name="recete_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Alim_Malzeme_Stok">
+          <End Role="Malzeme_Stok" Type="Self.Malzeme_Stok" Multiplicity="0..1" />
+          <End Role="Malzeme_Alim" Type="Self.Malzeme_Alim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Malzeme_Stok">
+              <PropertyRef Name="malzeme_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Alim">
+              <PropertyRef Name="malzeme_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Kullanim_Malzeme_Stok">
+          <End Role="Malzeme_Stok" Type="Self.Malzeme_Stok" Multiplicity="0..1" />
+          <End Role="Malzeme_Kullanim" Type="Self.Malzeme_Kullanim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Malzeme_Stok">
+              <PropertyRef Name="malzeme_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Kullanim">
+              <PropertyRef Name="malzeme_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Malzeme_Kullanim_Randevu">
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="0..1" />
+          <End Role="Malzeme_Kullanim" Type="Self.Malzeme_Kullanim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Randevu">
+              <PropertyRef Name="randevu_id" />
+            </Principal>
+            <Dependent Role="Malzeme_Kullanim">
+              <PropertyRef Name="randevu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Personel_Meslek">
+          <End Role="Meslek" Type="Self.Meslek" Multiplicity="0..1" />
+          <End Role="Personel" Type="Self.Personel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Meslek">
+              <PropertyRef Name="meslek_id" />
+            </Principal>
+            <Dependent Role="Personel">
+              <PropertyRef Name="meslek_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Randevu_Personel">
+          <End Role="Personel" Type="Self.Personel" Multiplicity="0..1" />
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Personel">
+              <PropertyRef Name="personel_id" />
+            </Principal>
+            <Dependent Role="Randevu">
+              <PropertyRef Name="personel_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Recete_Randevu">
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="0..1" />
+          <End Role="Recete" Type="Self.Recete" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Randevu">
+              <PropertyRef Name="randevu_id" />
+            </Principal>
+            <Dependent Role="Recete">
+              <PropertyRef Name="randevu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Sonuc_Randevu">
+          <End Role="Randevu" Type="Self.Randevu" Multiplicity="0..1" />
+          <End Role="Sonuc" Type="Self.Sonuc" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Randevu">
+              <PropertyRef Name="randevu_id" />
+            </Principal>
+            <Dependent Role="Sonuc">
+              <PropertyRef Name="randevu_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="HastaneVeritabaniEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Acil_Kayit" EntityType="Self.Acil_Kayit" />
+          <EntitySet Name="Adres" EntityType="Self.Adres" />
+          <EntitySet Name="Bütce" EntityType="Self.Bütce" />
+          <EntitySet Name="Departman" EntityType="Self.Departman" />
+          <EntitySet Name="Hasta" EntityType="Self.Hasta" />
+          <EntitySet Name="Ilac" EntityType="Self.Ilac" />
+          <EntitySet Name="Ilac_Recete" EntityType="Self.Ilac_Recete" />
+          <EntitySet Name="Malzeme_Alim" EntityType="Self.Malzeme_Alim" />
+          <EntitySet Name="Malzeme_Kullanim" EntityType="Self.Malzeme_Kullanim" />
+          <EntitySet Name="Malzeme_Stok" EntityType="Self.Malzeme_Stok" />
+          <EntitySet Name="Meslek" EntityType="Self.Meslek" />
+          <EntitySet Name="Personel" EntityType="Self.Personel" />
+          <EntitySet Name="Randevu" EntityType="Self.Randevu" />
+          <EntitySet Name="Recete" EntityType="Self.Recete" />
+          <EntitySet Name="Sonuc" EntityType="Self.Sonuc" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Yönetici" EntityType="Self.Yönetici" />
+          <AssociationSet Name="FK_Acil_Kayit_Hasta" Association="Self.FK_Acil_Kayit_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Acil_Kayit_Personel" Association="Self.FK_Acil_Kayit_Personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Kullanim_Acil_Kayit" Association="Self.FK_Malzeme_Kullanim_Acil_Kayit">
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+            <End Role="Malzeme_Kullanim" EntitySet="Malzeme_Kullanim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Acil_Kayit1" Association="Self.FK_Recete_Acil_Kayit1">
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sonuc_Acil_Kayit" Association="Self.FK_Sonuc_Acil_Kayit">
+            <End Role="Acil_Kayit" EntitySet="Acil_Kayit" />
+            <End Role="Sonuc" EntitySet="Sonuc" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hasta_Adres" Association="Self.FK_Hasta_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Hasta" EntitySet="Hasta" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Adres" Association="Self.FK_Personel_Adres">
+            <End Role="Adres" EntitySet="Adres" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Departman" Association="Self.FK_Personel_Departman">
+            <End Role="Departman" EntitySet="Departman" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Departman" Association="Self.FK_Randevu_Departman">
+            <End Role="Departman" EntitySet="Departman" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Hasta" Association="Self.FK_Randevu_Hasta">
+            <End Role="Hasta" EntitySet="Hasta" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilac_Recete_Ilac" Association="Self.FK_Ilac_Recete_Ilac">
+            <End Role="Ilac" EntitySet="Ilac" />
+            <End Role="Ilac_Recete" EntitySet="Ilac_Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ilac_Recete_Recete" Association="Self.FK_Ilac_Recete_Recete">
+            <End Role="Recete" EntitySet="Recete" />
+            <End Role="Ilac_Recete" EntitySet="Ilac_Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Alim_Malzeme_Stok" Association="Self.FK_Malzeme_Alim_Malzeme_Stok">
+            <End Role="Malzeme_Stok" EntitySet="Malzeme_Stok" />
+            <End Role="Malzeme_Alim" EntitySet="Malzeme_Alim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Kullanim_Malzeme_Stok" Association="Self.FK_Malzeme_Kullanim_Malzeme_Stok">
+            <End Role="Malzeme_Stok" EntitySet="Malzeme_Stok" />
+            <End Role="Malzeme_Kullanim" EntitySet="Malzeme_Kullanim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Malzeme_Kullanim_Randevu" Association="Self.FK_Malzeme_Kullanim_Randevu">
+            <End Role="Randevu" EntitySet="Randevu" />
+            <End Role="Malzeme_Kullanim" EntitySet="Malzeme_Kullanim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Personel_Meslek" Association="Self.FK_Personel_Meslek">
+            <End Role="Meslek" EntitySet="Meslek" />
+            <End Role="Personel" EntitySet="Personel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Randevu_Personel" Association="Self.FK_Randevu_Personel">
+            <End Role="Personel" EntitySet="Personel" />
+            <End Role="Randevu" EntitySet="Randevu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Recete_Randevu" Association="Self.FK_Recete_Randevu">
+            <End Role="Randevu" EntitySet="Randevu" />
+            <End Role="Recete" EntitySet="Recete" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Sonuc_Randevu" Association="Self.FK_Sonuc_Randevu">
+            <End Role="Randevu" EntitySet="Randevu" />
+            <End Role="Sonuc" EntitySet="Sonuc" />
+          </AssociationSet>
+          <FunctionImport Name="fn_HastaToplamKayitRandevuSayi" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_HastaToplamKayitRandevuSayi_Result)">
+            <Parameter Name="HastaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_IlacReceteSayiHesapla" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_IlacReceteSayiHesapla_Result)" />
+          <FunctionImport Name="fn_MeslekPersonelMaasHesapla" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_MeslekPersonelMaasHesapla_Result)">
+            <Parameter Name="MeslekID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_MeslekPersonelSayiHesapla" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_MeslekPersonelSayiHesapla_Result)">
+            <Parameter Name="MeslekID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_ToplamKayitRandevuHastaSayiHesapla" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_ToplamKayitRandevuHastaSayiHesapla_Result)">
+            <Parameter Name="DepartmanID" Mode="In" Type="Int32" />
+            <Parameter Name="PersonelID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_ToplamPersonelMaasiHesapla" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_ToplamPersonelMaasiHesapla_Result)">
+            <Parameter Name="DepartmanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="fn_ToplamPersonelSayiHesapla" IsComposable="true" ReturnType="Collection(HastaneVeritabaniModel.fn_ToplamPersonelSayiHesapla_Result)">
+            <Parameter Name="DepartmanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_alterdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_AnaSayfa" ReturnType="Collection(HastaneVeritabaniModel.sp_AnaSayfa_Result)" />
+          <FunctionImport Name="sp_creatediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="version" Mode="In" Type="Int32" />
+            <Parameter Name="definition" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="sp_DepartmanBilgi" ReturnType="Collection(HastaneVeritabaniModel.sp_DepartmanBilgi_Result)">
+            <Parameter Name="DepartmanID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_dropdiagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_HastaBilgi" ReturnType="Collection(HastaneVeritabaniModel.sp_HastaBilgi_Result)">
+            <Parameter Name="HastaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(HastaneVeritabaniModel.sp_helpdiagramdefinition_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(HastaneVeritabaniModel.sp_helpdiagrams_Result)">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_MeslekBilgi" ReturnType="Collection(HastaneVeritabaniModel.sp_MeslekBilgi_Result)">
+            <Parameter Name="MeslekID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_PersonelBilgi" ReturnType="Collection(HastaneVeritabaniModel.sp_PersonelBilgi_Result)">
+            <Parameter Name="PersonelID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="sp_renamediagram">
+            <Parameter Name="diagramname" Mode="In" Type="String" />
+            <Parameter Name="owner_id" Mode="In" Type="Int32" />
+            <Parameter Name="new_diagramname" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="sp_upgraddiagrams" />
+        </EntityContainer>
+        <ComplexType Name="sp_AnaSayfa_Result">
+          <Property Type="Int32" Name="AktifDepartmanSayi" Nullable="false" />
+          <Property Type="Int32" Name="YöneticiSayi" Nullable="false" />
+          <Property Type="Int32" Name="AktifPersonelSayi" Nullable="false" />
+          <Property Type="Int32" Name="HastaSayi" Nullable="false" />
+          <Property Type="Int32" Name="AcilRandevuSayi" Nullable="true" />
+          <Property Type="Int32" Name="IlacReceteSayi" Nullable="true" />
+          <Property Type="Int32" Name="SonucSayi" Nullable="false" />
+          <Property Type="Int32" Name="MalzemeIslemSayi" Nullable="true" />
+          <Property Type="Int32" Name="AdresSayi" Nullable="false" />
+          <Property Type="Int32" Name="ButceMeslekSayi" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_DepartmanBilgi_Result">
+          <Property Type="Int32" Name="KayitRandevuHastaAktifToplamSayi" Nullable="true" />
+          <Property Type="Int32" Name="KayitRandevuHastaToplamSayi" Nullable="true" />
+          <Property Type="Int32" Name="DepartmanMalzemeKullanimSayi" Nullable="true" />
+          <Property Type="Int32" Name="DepartmanSonucSayi" Nullable="true" />
+          <Property Type="Int32" Name="DepartmanReceteSayi" Nullable="true" />
+          <Property Type="Int32" Name="PersonelAktifToplamSayi" Nullable="true" />
+          <Property Type="Int32" Name="PersonelToplamSayi" Nullable="true" />
+          <Property Type="Decimal" Name="PersonelAktifToplamMaas" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Decimal" Name="PersonelToplamMaas" Nullable="true" Precision="38" Scale="2" />
+          <Property Type="Int32" Name="DepartmanID" Nullable="true" />
+          <Property Type="String" Name="DepartmanIsim" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="DepartmanDurum" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_HastaBilgi_Result">
+          <Property Type="Int32" Name="HastaID" Nullable="true" />
+          <Property Type="String" Name="HastaTCNo" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="HastaAd" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="HastaSoyad" Nullable="true" MaxLength="30" />
+          <Property Type="Boolean" Name="HastaCinsiyet" Nullable="true" />
+          <Property Type="String" Name="HastaTelefon" Nullable="true" MaxLength="14" />
+          <Property Type="DateTime" Name="HastaDogumTarihi" Nullable="true" />
+          <Property Type="Int32" Name="HastaAdresID" Nullable="true" />
+          <Property Type="Int32" Name="HastaAktifKayitSayi" Nullable="true" />
+          <Property Type="Int32" Name="HastaToplamKayitSayi" Nullable="true" />
+          <Property Type="Int32" Name="HastaAktifRandevuSayi" Nullable="true" />
+          <Property Type="Int32" Name="HastaToplamRandevuSayi" Nullable="true" />
+          <Property Type="Int32" Name="HastaMalzemeKullanimSayi" Nullable="true" />
+          <Property Type="Int32" Name="HastaSonucSayi" Nullable="true" />
+          <Property Type="Int32" Name="HastaReceteSayi" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagramdefinition_Result">
+          <Property Type="Int32" Name="version" Nullable="true" />
+          <Property Type="Binary" Name="definition" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="sp_helpdiagrams_Result">
+          <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+          <Property Type="Int32" Name="ID" Nullable="false" />
+          <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+          <Property Type="Int32" Name="OwnerID" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="sp_MeslekBilgi_Result">
+          <Property Type="Int32" Name="PersonelAktifToplamSayi" Nullable="true" />
+          <Property Type="Int32" Name="PersonelToplamSayi" Nullable="true" />
+          <Property Type="Decimal" Name="PersonelAktifToplamMaas" Nullable="true" Precision="29" Scale="2" />
+          <Property Type="Decimal" Name="PersonelToplamMaas" Nullable="true" Precision="29" Scale="2" />
+          <Property Type="Int32" Name="MeslekID" Nullable="true" />
+          <Property Type="String" Name="MeslekAd" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="MeslekMaas" Nullable="true" Precision="18" Scale="2" />
+        </ComplexType>
+        <ComplexType Name="sp_PersonelBilgi_Result">
+          <Property Type="Int32" Name="PersonelID" Nullable="true" />
+          <Property Type="String" Name="PersonelTCNo" Nullable="true" MaxLength="11" />
+          <Property Type="String" Name="PersonelAd" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonelSoyad" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonelDepartman" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="PersonelMeslek" Nullable="true" MaxLength="30" />
+          <Property Type="Decimal" Name="PersonelMaas" Nullable="true" Precision="18" Scale="2" />
+          <Property Type="Boolean" Name="PersonelDurum" Nullable="true" />
+          <Property Type="Boolean" Name="PersonelCinsiyet" Nullable="true" />
+          <Property Type="String" Name="PersonelTelefon" Nullable="true" MaxLength="14" />
+          <Property Type="DateTime" Name="PersonelDogumTarihi" Nullable="true" />
+          <Property Type="DateTime" Name="PersonelGirisTarihi" Nullable="true" Precision="23" />
+          <Property Type="Int32" Name="PersonelAdresID" Nullable="true" />
+          <Property Type="Int32" Name="KayitRandevuHastaAktifToplamSayi" Nullable="true" />
+          <Property Type="Int32" Name="KayitRandevuHastaToplamSayi" Nullable="true" />
+          <Property Type="Int32" Name="PersonelMalzemeKullanimSayi" Nullable="true" />
+          <Property Type="Int32" Name="PersonelSonucSayi" Nullable="true" />
+          <Property Type="Int32" Name="PersonelReceteSayi" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HastaneVeritabaniModelStoreContainer" CdmEntityContainer="HastaneVeritabaniEntities2">
+          <EntitySetMapping Name="Acil_Kayit">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Acil_Kayit">
+              <MappingFragment StoreEntitySet="Acil_Kayit">
+                <ScalarProperty Name="acil_id" ColumnName="acil_id" />
+                <ScalarProperty Name="acil_giris_tarihi" ColumnName="acil_giris_tarihi" />
+                <ScalarProperty Name="acil_cikis_tarihi" ColumnName="acil_cikis_tarihi" />
+                <ScalarProperty Name="acil_tani" ColumnName="acil_tani" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="hasta_id" ColumnName="hasta_id" />
+                <ScalarProperty Name="acil_kayit_durum" ColumnName="acil_kayit_durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Adres">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Adres">
+              <MappingFragment StoreEntitySet="Adres">
+                <ScalarProperty Name="adres_id" ColumnName="adres_id" />
+                <ScalarProperty Name="sehir" ColumnName="sehir" />
+                <ScalarProperty Name="ilce" ColumnName="ilce" />
+                <ScalarProperty Name="mahalle" ColumnName="mahalle" />
+                <ScalarProperty Name="sokak" ColumnName="sokak" />
+                <ScalarProperty Name="bina" ColumnName="bina" />
+                <ScalarProperty Name="daire" ColumnName="daire" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bütce">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Bütce">
+              <MappingFragment StoreEntitySet="Bütce">
+                <ScalarProperty Name="bütce_id" ColumnName="bütce_id" />
+                <ScalarProperty Name="bütce_tutar" ColumnName="bütce_tutar" />
+                <ScalarProperty Name="bütce_kategori" ColumnName="bütce_kategori" />
+                <ScalarProperty Name="bütce_tipi" ColumnName="bütce_tipi" />
+                <ScalarProperty Name="bütce_tarihi" ColumnName="bütce_tarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departman">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Departman">
+              <MappingFragment StoreEntitySet="Departman">
+                <ScalarProperty Name="departman_id" ColumnName="departman_id" />
+                <ScalarProperty Name="departman_ad" ColumnName="departman_ad" />
+                <ScalarProperty Name="departman_durum" ColumnName="departman_durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hasta">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Hasta">
+              <MappingFragment StoreEntitySet="Hasta">
+                <ScalarProperty Name="hasta_id" ColumnName="hasta_id" />
+                <ScalarProperty Name="hasta_ad" ColumnName="hasta_ad" />
+                <ScalarProperty Name="hasta_soyad" ColumnName="hasta_soyad" />
+                <ScalarProperty Name="hasta_tcno" ColumnName="hasta_tcno" />
+                <ScalarProperty Name="hasta_cinsiyet" ColumnName="hasta_cinsiyet" />
+                <ScalarProperty Name="hasta_dogum_tarihi" ColumnName="hasta_dogum_tarihi" />
+                <ScalarProperty Name="hasta_telefon" ColumnName="hasta_telefon" />
+                <ScalarProperty Name="adres_id" ColumnName="adres_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilac">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Ilac">
+              <MappingFragment StoreEntitySet="Ilac">
+                <ScalarProperty Name="ilac_id" ColumnName="ilac_id" />
+                <ScalarProperty Name="ilac_ad" ColumnName="ilac_ad" />
+                <ScalarProperty Name="ilac_barkod" ColumnName="ilac_barkod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ilac_Recete">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Ilac_Recete">
+              <MappingFragment StoreEntitySet="Ilac_Recete">
+                <ScalarProperty Name="ilac_recete_id" ColumnName="ilac_recete_id" />
+                <ScalarProperty Name="recete_id" ColumnName="recete_id" />
+                <ScalarProperty Name="ilac_id" ColumnName="ilac_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Malzeme_Alim">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Malzeme_Alim">
+              <MappingFragment StoreEntitySet="Malzeme_Alim">
+                <ScalarProperty Name="alim_id" ColumnName="alim_id" />
+                <ScalarProperty Name="alim_firma" ColumnName="alim_firma" />
+                <ScalarProperty Name="alim_adet" ColumnName="alim_adet" />
+                <ScalarProperty Name="alim_fiyat" ColumnName="alim_fiyat" />
+                <ScalarProperty Name="alim_tarihi" ColumnName="alim_tarihi" />
+                <ScalarProperty Name="malzeme_id" ColumnName="malzeme_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Malzeme_Kullanim">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Malzeme_Kullanim">
+              <MappingFragment StoreEntitySet="Malzeme_Kullanim">
+                <ScalarProperty Name="kullanim_id" ColumnName="kullanim_id" />
+                <ScalarProperty Name="kullanim_adet" ColumnName="kullanim_adet" />
+                <ScalarProperty Name="kullanim_tarihi" ColumnName="kullanim_tarihi" />
+                <ScalarProperty Name="malzeme_id" ColumnName="malzeme_id" />
+                <ScalarProperty Name="acil_id" ColumnName="acil_id" />
+                <ScalarProperty Name="randevu_id" ColumnName="randevu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Malzeme_Stok">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Malzeme_Stok">
+              <MappingFragment StoreEntitySet="Malzeme_Stok">
+                <ScalarProperty Name="malzeme_id" ColumnName="malzeme_id" />
+                <ScalarProperty Name="malzeme_ad" ColumnName="malzeme_ad" />
+                <ScalarProperty Name="malzeme_adet" ColumnName="malzeme_adet" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Meslek">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Meslek">
+              <MappingFragment StoreEntitySet="Meslek">
+                <ScalarProperty Name="meslek_id" ColumnName="meslek_id" />
+                <ScalarProperty Name="meslek_ad" ColumnName="meslek_ad" />
+                <ScalarProperty Name="meslek_maas" ColumnName="meslek_maas" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Personel">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Personel">
+              <MappingFragment StoreEntitySet="Personel">
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="personel_ad" ColumnName="personel_ad" />
+                <ScalarProperty Name="personel_soyad" ColumnName="personel_soyad" />
+                <ScalarProperty Name="personel_tcno" ColumnName="personel_tcno" />
+                <ScalarProperty Name="personel_cinsiyet" ColumnName="personel_cinsiyet" />
+                <ScalarProperty Name="personel_dogum_tarihi" ColumnName="personel_dogum_tarihi" />
+                <ScalarProperty Name="personel_telefon" ColumnName="personel_telefon" />
+                <ScalarProperty Name="personel_giris_tarihi" ColumnName="personel_giris_tarihi" />
+                <ScalarProperty Name="adres_id" ColumnName="adres_id" />
+                <ScalarProperty Name="meslek_id" ColumnName="meslek_id" />
+                <ScalarProperty Name="departman_id" ColumnName="departman_id" />
+                <ScalarProperty Name="personel_durum" ColumnName="personel_durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Randevu">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Randevu">
+              <MappingFragment StoreEntitySet="Randevu">
+                <ScalarProperty Name="randevu_id" ColumnName="randevu_id" />
+                <ScalarProperty Name="randevu_tarih" ColumnName="randevu_tarih" />
+                <ScalarProperty Name="hasta_id" ColumnName="hasta_id" />
+                <ScalarProperty Name="personel_id" ColumnName="personel_id" />
+                <ScalarProperty Name="departman_id" ColumnName="departman_id" />
+                <ScalarProperty Name="randevu_durum" ColumnName="randevu_durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Recete">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Recete">
+              <MappingFragment StoreEntitySet="Recete">
+                <ScalarProperty Name="recete_id" ColumnName="recete_id" />
+                <ScalarProperty Name="recete_son_kullanim_tarihi" ColumnName="recete_son_kullanim_tarihi" />
+                <ScalarProperty Name="recete_durum" ColumnName="recete_durum" />
+                <ScalarProperty Name="acil_id" ColumnName="acil_id" />
+                <ScalarProperty Name="randevu_id" ColumnName="randevu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sonuc">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Sonuc">
+              <MappingFragment StoreEntitySet="Sonuc">
+                <ScalarProperty Name="sonuc_id" ColumnName="sonuc_id" />
+                <ScalarProperty Name="sonuc_test_tarih" ColumnName="sonuc_test_tarih" />
+                <ScalarProperty Name="sonuc_cikis_tarih" ColumnName="sonuc_cikis_tarih" />
+                <ScalarProperty Name="sonuc_aciklama" ColumnName="sonuc_aciklama" />
+                <ScalarProperty Name="sonuc_test_tipi" ColumnName="sonuc_test_tipi" />
+                <ScalarProperty Name="sonuc_durum" ColumnName="sonuc_durum" />
+                <ScalarProperty Name="acil_id" ColumnName="acil_id" />
+                <ScalarProperty Name="randevu_id" ColumnName="randevu_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Yönetici">
+            <EntityTypeMapping TypeName="HastaneVeritabaniModel.Yönetici">
+              <MappingFragment StoreEntitySet="Yönetici">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="kullanici_adi" ColumnName="kullanici_adi" />
+                <ScalarProperty Name="sifre" ColumnName="sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_HastaToplamKayitRandevuSayi" FunctionImportName="fn_HastaToplamKayitRandevuSayi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_HastaToplamKayitRandevuSayi_Result">
+                <ScalarProperty Name="HastaAktifKayitSayi" ColumnName="HastaAktifKayitSayi" />
+                <ScalarProperty Name="HastaToplamKayitSayi" ColumnName="HastaToplamKayitSayi" />
+                <ScalarProperty Name="HastaAktifRandevuSayi" ColumnName="HastaAktifRandevuSayi" />
+                <ScalarProperty Name="HastaToplamRandevuSayi" ColumnName="HastaToplamRandevuSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_IlacReceteSayiHesapla" FunctionImportName="fn_IlacReceteSayiHesapla">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_IlacReceteSayiHesapla_Result">
+                <ScalarProperty Name="IlacID" ColumnName="IlacID" />
+                <ScalarProperty Name="IlacReceteSayi" ColumnName="IlacReceteSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_MeslekPersonelMaasHesapla" FunctionImportName="fn_MeslekPersonelMaasHesapla">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_MeslekPersonelMaasHesapla_Result">
+                <ScalarProperty Name="PersonelAktifToplamMaas" ColumnName="PersonelAktifToplamMaas" />
+                <ScalarProperty Name="PersonelToplamMaas" ColumnName="PersonelToplamMaas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_MeslekPersonelSayiHesapla" FunctionImportName="fn_MeslekPersonelSayiHesapla">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_MeslekPersonelSayiHesapla_Result">
+                <ScalarProperty Name="PersonelAktifToplamSayi" ColumnName="PersonelAktifToplamSayi" />
+                <ScalarProperty Name="PersonelToplamSayi" ColumnName="PersonelToplamSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_ToplamKayitRandevuHastaSayiHesapla" FunctionImportName="fn_ToplamKayitRandevuHastaSayiHesapla">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_ToplamKayitRandevuHastaSayiHesapla_Result">
+                <ScalarProperty Name="KayitRandevuHastaAktifToplamSayi" ColumnName="KayitRandevuHastaAktifToplamSayi" />
+                <ScalarProperty Name="KayitRandevuHastaToplamSayi" ColumnName="KayitRandevuHastaToplamSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_ToplamPersonelMaasiHesapla" FunctionImportName="fn_ToplamPersonelMaasiHesapla">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_ToplamPersonelMaasiHesapla_Result">
+                <ScalarProperty Name="PersonelAktifToplamMaas" ColumnName="PersonelAktifToplamMaas" />
+                <ScalarProperty Name="PersonelToplamMaas" ColumnName="PersonelToplamMaas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionName="HastaneVeritabaniModel.Store.fn_ToplamPersonelSayiHesapla" FunctionImportName="fn_ToplamPersonelSayiHesapla">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.fn_ToplamPersonelSayiHesapla_Result">
+                <ScalarProperty Name="PersonelAktifToplamSayi" ColumnName="PersonelAktifToplamSayi" />
+                <ScalarProperty Name="PersonelToplamSayi" ColumnName="PersonelToplamSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_alterdiagram" FunctionName="HastaneVeritabaniModel.Store.sp_alterdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_AnaSayfa" FunctionName="HastaneVeritabaniModel.Store.sp_AnaSayfa">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_AnaSayfa_Result">
+                <ScalarProperty Name="AktifDepartmanSayi" ColumnName="AktifDepartmanSayi" />
+                <ScalarProperty Name="YöneticiSayi" ColumnName="YöneticiSayi" />
+                <ScalarProperty Name="AktifPersonelSayi" ColumnName="AktifPersonelSayi" />
+                <ScalarProperty Name="HastaSayi" ColumnName="HastaSayi" />
+                <ScalarProperty Name="AcilRandevuSayi" ColumnName="AcilRandevuSayi" />
+                <ScalarProperty Name="IlacReceteSayi" ColumnName="IlacReceteSayi" />
+                <ScalarProperty Name="SonucSayi" ColumnName="SonucSayi" />
+                <ScalarProperty Name="MalzemeIslemSayi" ColumnName="MalzemeIslemSayi" />
+                <ScalarProperty Name="AdresSayi" ColumnName="AdresSayi" />
+                <ScalarProperty Name="ButceMeslekSayi" ColumnName="ButceMeslekSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_creatediagram" FunctionName="HastaneVeritabaniModel.Store.sp_creatediagram" />
+          <FunctionImportMapping FunctionImportName="sp_DepartmanBilgi" FunctionName="HastaneVeritabaniModel.Store.sp_DepartmanBilgi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_DepartmanBilgi_Result">
+                <ScalarProperty Name="KayitRandevuHastaAktifToplamSayi" ColumnName="KayitRandevuHastaAktifToplamSayi" />
+                <ScalarProperty Name="KayitRandevuHastaToplamSayi" ColumnName="KayitRandevuHastaToplamSayi" />
+                <ScalarProperty Name="DepartmanMalzemeKullanimSayi" ColumnName="DepartmanMalzemeKullanimSayi" />
+                <ScalarProperty Name="DepartmanSonucSayi" ColumnName="DepartmanSonucSayi" />
+                <ScalarProperty Name="DepartmanReceteSayi" ColumnName="DepartmanReceteSayi" />
+                <ScalarProperty Name="PersonelAktifToplamSayi" ColumnName="PersonelAktifToplamSayi" />
+                <ScalarProperty Name="PersonelToplamSayi" ColumnName="PersonelToplamSayi" />
+                <ScalarProperty Name="PersonelAktifToplamMaas" ColumnName="PersonelAktifToplamMaas" />
+                <ScalarProperty Name="PersonelToplamMaas" ColumnName="PersonelToplamMaas" />
+                <ScalarProperty Name="DepartmanID" ColumnName="DepartmanID" />
+                <ScalarProperty Name="DepartmanIsim" ColumnName="DepartmanIsim" />
+                <ScalarProperty Name="DepartmanDurum" ColumnName="DepartmanDurum" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_dropdiagram" FunctionName="HastaneVeritabaniModel.Store.sp_dropdiagram" />
+          <FunctionImportMapping FunctionImportName="sp_HastaBilgi" FunctionName="HastaneVeritabaniModel.Store.sp_HastaBilgi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_HastaBilgi_Result">
+                <ScalarProperty Name="HastaID" ColumnName="HastaID" />
+                <ScalarProperty Name="HastaTCNo" ColumnName="HastaTCNo" />
+                <ScalarProperty Name="HastaAd" ColumnName="HastaAd" />
+                <ScalarProperty Name="HastaSoyad" ColumnName="HastaSoyad" />
+                <ScalarProperty Name="HastaCinsiyet" ColumnName="HastaCinsiyet" />
+                <ScalarProperty Name="HastaTelefon" ColumnName="HastaTelefon" />
+                <ScalarProperty Name="HastaDogumTarihi" ColumnName="HastaDogumTarihi" />
+                <ScalarProperty Name="HastaAdresID" ColumnName="HastaAdresID" />
+                <ScalarProperty Name="HastaAktifKayitSayi" ColumnName="HastaAktifKayitSayi" />
+                <ScalarProperty Name="HastaToplamKayitSayi" ColumnName="HastaToplamKayitSayi" />
+                <ScalarProperty Name="HastaAktifRandevuSayi" ColumnName="HastaAktifRandevuSayi" />
+                <ScalarProperty Name="HastaToplamRandevuSayi" ColumnName="HastaToplamRandevuSayi" />
+                <ScalarProperty Name="HastaMalzemeKullanimSayi" ColumnName="HastaMalzemeKullanimSayi" />
+                <ScalarProperty Name="HastaSonucSayi" ColumnName="HastaSonucSayi" />
+                <ScalarProperty Name="HastaReceteSayi" ColumnName="HastaReceteSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagramdefinition" FunctionName="HastaneVeritabaniModel.Store.sp_helpdiagramdefinition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_helpdiagramdefinition_Result">
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_helpdiagrams" FunctionName="HastaneVeritabaniModel.Store.sp_helpdiagrams">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_helpdiagrams_Result">
+                <ScalarProperty Name="Database" ColumnName="Database" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Owner" ColumnName="Owner" />
+                <ScalarProperty Name="OwnerID" ColumnName="OwnerID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_MeslekBilgi" FunctionName="HastaneVeritabaniModel.Store.sp_MeslekBilgi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_MeslekBilgi_Result">
+                <ScalarProperty Name="PersonelAktifToplamSayi" ColumnName="PersonelAktifToplamSayi" />
+                <ScalarProperty Name="PersonelToplamSayi" ColumnName="PersonelToplamSayi" />
+                <ScalarProperty Name="PersonelAktifToplamMaas" ColumnName="PersonelAktifToplamMaas" />
+                <ScalarProperty Name="PersonelToplamMaas" ColumnName="PersonelToplamMaas" />
+                <ScalarProperty Name="MeslekID" ColumnName="MeslekID" />
+                <ScalarProperty Name="MeslekAd" ColumnName="MeslekAd" />
+                <ScalarProperty Name="MeslekMaas" ColumnName="MeslekMaas" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_PersonelBilgi" FunctionName="HastaneVeritabaniModel.Store.sp_PersonelBilgi">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HastaneVeritabaniModel.sp_PersonelBilgi_Result">
+                <ScalarProperty Name="PersonelID" ColumnName="PersonelID" />
+                <ScalarProperty Name="PersonelTCNo" ColumnName="PersonelTCNo" />
+                <ScalarProperty Name="PersonelAd" ColumnName="PersonelAd" />
+                <ScalarProperty Name="PersonelSoyad" ColumnName="PersonelSoyad" />
+                <ScalarProperty Name="PersonelDepartman" ColumnName="PersonelDepartman" />
+                <ScalarProperty Name="PersonelMeslek" ColumnName="PersonelMeslek" />
+                <ScalarProperty Name="PersonelMaas" ColumnName="PersonelMaas" />
+                <ScalarProperty Name="PersonelDurum" ColumnName="PersonelDurum" />
+                <ScalarProperty Name="PersonelCinsiyet" ColumnName="PersonelCinsiyet" />
+                <ScalarProperty Name="PersonelTelefon" ColumnName="PersonelTelefon" />
+                <ScalarProperty Name="PersonelDogumTarihi" ColumnName="PersonelDogumTarihi" />
+                <ScalarProperty Name="PersonelGirisTarihi" ColumnName="PersonelGirisTarihi" />
+                <ScalarProperty Name="PersonelAdresID" ColumnName="PersonelAdresID" />
+                <ScalarProperty Name="KayitRandevuHastaAktifToplamSayi" ColumnName="KayitRandevuHastaAktifToplamSayi" />
+                <ScalarProperty Name="KayitRandevuHastaToplamSayi" ColumnName="KayitRandevuHastaToplamSayi" />
+                <ScalarProperty Name="PersonelMalzemeKullanimSayi" ColumnName="PersonelMalzemeKullanimSayi" />
+                <ScalarProperty Name="PersonelSonucSayi" ColumnName="PersonelSonucSayi" />
+                <ScalarProperty Name="PersonelReceteSayi" ColumnName="PersonelReceteSayi" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="sp_renamediagram" FunctionName="HastaneVeritabaniModel.Store.sp_renamediagram" />
+          <FunctionImportMapping FunctionImportName="sp_upgraddiagrams" FunctionName="HastaneVeritabaniModel.Store.sp_upgraddiagrams" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

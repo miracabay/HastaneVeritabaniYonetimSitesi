@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="26631c6ab4df408582232a30dd39313d" Name="Diagram1">
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Acil_Kayit" Width="1.5" PointX="5.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Adres" Width="1.5" PointX="0.75" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Bütce" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Departman" Width="1.5" PointX="0.75" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Hasta" Width="1.5" PointX="3" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Ilac" Width="1.5" PointX="13.5" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Ilac_Recete" Width="1.5" PointX="15.75" PointY="10.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Malzeme_Alim" Width="1.5" PointX="10.5" PointY="2" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Malzeme_Kullanim" Width="1.5" PointX="10.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Malzeme_Stok" Width="1.5" PointX="8.25" PointY="6.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Meslek" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Personel" Width="1.5" PointX="3" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Randevu" Width="1.5" PointX="8.25" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Recete" Width="1.5" PointX="13.5" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Sonuc" Width="1.5" PointX="10.5" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.sysdiagrams" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HastaneVeritabaniModel.Yönetici" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Acil_Kayit_Hasta" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Acil_Kayit_Personel" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Malzeme_Kullanim_Acil_Kayit" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Recete_Acil_Kayit1" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Sonuc_Acil_Kayit" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Hasta_Adres" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Personel_Adres" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Personel_Departman" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Randevu_Departman" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Randevu_Hasta" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Ilac_Recete_Ilac" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Ilac_Recete_Recete" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Malzeme_Alim_Malzeme_Stok" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Malzeme_Kullanim_Malzeme_Stok" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Malzeme_Kullanim_Randevu" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Personel_Meslek" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Randevu_Personel" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Recete_Randevu" ManuallyRouted="false" />
+        <AssociationConnector Association="HastaneVeritabaniModel.FK_Sonuc_Randevu" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

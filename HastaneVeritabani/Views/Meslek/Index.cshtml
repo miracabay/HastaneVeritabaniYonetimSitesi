@@ -1,0 +1,46 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Meslek>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet meslek bilgisi bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Meslek/YeniMeslek" class="btn btn-success">Yeni Meslek Ekle</a>
+</div>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+
+        <input type="text" name="arama" class="form-control" placeholder="Meslek ara" onclick="this.select() " value="@ViewBag.Arama" />
+        <button type="submit" class="btn btn-warning" onclick="clearSearch()">Ara</button>
+        <a href="/Meslek/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+</div>
+<b>Meslek;</b>
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Ad</th>
+        <th>Maaş</th>
+        <th>Bilgi</th>
+    </tr>
+    <tbody>
+        @foreach (var meslek in Model)
+        {
+            <tr>
+                <td>@meslek.meslek_ad</td>
+                <td>@meslek.meslek_maas ₺</td>
+                <td><a href="@Url.Action("Meslekbilgi", "Meslek", new { id = meslek.meslek_id })" class="btn btn-warning">🔍</a></td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>

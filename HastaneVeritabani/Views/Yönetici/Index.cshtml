@@ -1,0 +1,57 @@
+﻿@using HastaneVeritabani.Models.Entity
+@using PagedList
+@using PagedList.Mvc
+
+@model PagedList.IPagedList<Yönetici>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h3>Veritabanında <i>@Model.Count</i> adet yönetici bulundu.</h3>
+
+<div style="text-align: right;">
+    <a href="/Yönetici/YeniYönetici" class="btn btn-success">Yeni Yönetici Ekle</a>
+</div>
+
+<div style="text-align: right; padding-top: 15px;">
+    <form asp-action="Index" method="get" class="form-inline">
+        <input type="text" name="arama" class="form-control" placeholder="Yönetici adı ara" value="@ViewBag.Arama" />
+        <button type="submit" class="btn btn-warning">Ara</button>
+        <a href="/Yönetici/Index" class="btn btn-primary">Sıfırla</a>
+    </form>
+</div>
+
+<table class="table table-danger" style="border-top: 3px solid #1e1e1e; width: 100%; ">
+    <tr>
+        <th>Yönetici Adı</th>
+        <th>Yönetici Şifresi</th>
+    </tr>
+    <tbody>
+        @foreach (var yönetici in Model)
+        {
+            <tr>
+                <td>@yönetici.kullanici_adi</td>
+                <td>@yönetici.sifre</td>
+                <td style="text-align: right;">
+                    @if (yönetici.id != 1)
+                    {
+                        <a href="@Url.Action("YöneticiGetir", "Yönetici", new { id = yönetici.id })" class="btn btn-primary">Güncelle</a>
+                        <a href="@Url.Action("Sil", "Yönetici", new { id = yönetici.id })" class="btn btn-danger" onclick="return confirm('Silmek istediğinize emin misiniz?');">Sil</a>
+                    }
+                    @if (yönetici.id == 1)
+                    {
+                        {
+                            <span class="text-danger" style="font-size: 15px">Bu yönetici değiştirilemez ve silinemez.</span>
+                        }
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div style="text-align: center;">
+    @Html.PagedListPager((IPagedList)Model, sayfa => Url.Action("Index", new { sayfa }))
+</div>
